@@ -97,8 +97,8 @@ class HTTP_Header_Cache extends HTTP_Header
      *  $httpCache->isOlderThan(15);
      * </code>
      * 
-     * If you sepcify something greater than "weeks" as untit, it just works 
-     * approximatley, because a mount is taken to consist of 4.3 weeks.
+     * If you specify something greater than "weeks" as time untit, it just 
+     * works approximatly, because a month is taken to consist of 4.3 weeks.
      * 
      * @access  public
      * @return  bool    Returns true if requested page is older than specified.
@@ -176,6 +176,18 @@ class HTTP_Header_Cache extends HTTP_Header
             $this->sendStatusCode(304);
             exit;
         }
+    }
+    
+    /**
+     * Set Last Modified
+     * 
+     * @access  public
+     * @return  void
+     * @param   int     $lastModified The unix timestamp of last modification.
+     */
+    function setLastModified($lastModifed = null)
+    {
+        $this->setHeader('Last-Modified', $lastModified);
     }
 }
 ?>
