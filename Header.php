@@ -343,16 +343,13 @@ class HTTP_Header extends HTTP
      * @return  void
      * @param   string  $url The URL to redirect to, if none is given it 
      *                  redirects to the current page.
-     * @param   mixed   $param Possible values:
-     *                      o null (default) - only the session-id will be 
-     *                        added, but only when trans_sid is enabled.
-     *                      o false - no parameters to add
-     *                      o true - add the session-id
-     *                      o array - of parameter names, if the key is a string
-     *                        it's assumed to be name => value, otherwise the 
-     *                        value is retreived using $GLOBALS['paraName'].
+     * @param   array   $param Array of query string parameters to add; usually
+     *                  a set of key => value pairs; if an array entry consists
+     *                  only of an value it is used as key and the respective
+     *                  value is fetched from $GLOBALS[$value]
+     * @param   bool    $session Whether the session name/id should be added
      */
-    function redirect($url = null, $param = null)
+    function redirect($url = null, $param = array(), $session = false)
     {
         if (!isset($url)) {
             $url = $_SERVER['PHP_SELF'];
@@ -360,7 +357,7 @@ class HTTP_Header extends HTTP
         
         $qs = array();
 
-        if ($param || (!isset($param) && ini_get('session.use_trans_sid'))) {
+        if ($session) {
             $qs[] = session_name() .'='. session_id();
         }
 
