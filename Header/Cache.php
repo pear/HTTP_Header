@@ -17,7 +17,7 @@
 require_once 'HTTP/Header.php';
 
 /**
- * HTTP_Header
+ * HTTP_Header_Cache
  * 
  * This package provides methods to easier handle caching of HTTP pages.  That 
  * means that the pages can be cached at the client (user agent or browser) and 
@@ -56,6 +56,7 @@ class HTTP_Header_Cache extends HTTP_Header
      */
     function HTTP_Header_Cache($expires = 0, $unit = 'seconds')
     {
+        parent::HTTP_Header();
         $this->setHeader('Pragma', 'cache');
         $this->setHeader('Cache-Control', 'public');
         $this->setHeader('Last-Modified', $this->getCacheStart());
