@@ -185,7 +185,7 @@ class HTTP_Header_Cache extends HTTP_Header
      * @return  void
      * @param   int     $lastModified The unix timestamp of last modification.
      */
-    function setLastModified($lastModifed = null)
+    function setLastModified($lastModified = null)
     {
         $this->setHeader('Last-Modified', $lastModified);
     }
