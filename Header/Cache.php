@@ -167,7 +167,7 @@ class HTTP_Header_Cache extends HTTP_Header
         if (!$lastModified) {
             return true;
         }
-        return $lastModified > $this->getCacheStart();
+        return $lastModified < $this->getCacheStart();
     }
     
     /**
