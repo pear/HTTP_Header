@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.1">
-<!-- $Revision: 1.19 $ -->
+<!-- $Revision: 1.20 $ -->
 <package version="1.0">
  <name>HTTP_Header</name>
  <summary>
@@ -54,25 +54,25 @@ It also provides methods for checking Status types.
   </deps>
  </release>
  <changelog>
-		<release>
-			<version>1.0.0RC1</version>
-			<date>2004-07-02</date>
-			<license>PHP License</license>
-			<state>beta</state>
-			<notes>
+  <release>
+   <version>1.0.0RC1</version>
+   <date>2004-07-02</date>
+   <license>PHP License</license>
+   <state>beta</state>
+   <notes>
 * First Release Candidate for stable release.
-			</notes>
-		</release>
-	 <release>
-	  <version>0.3.0</version>
-	  <date>2004-06-12</date>
-	  <license>PHP License</license>
-	  <state>beta</state>
-	  <notes>
+   </notes>
+  </release>
+  <release>
+   <version>0.3.0</version>
+   <date>2004-06-12</date>
+   <license>PHP License</license>
+   <state>beta</state>
+   <notes>
 * refactored HTTP_Header_Cache
 * fixed typos in HTTP_Header::dateToTimestamp()
-	  </notes>
-		</release>
+   </notes>
+  </release>
   <release>
    <version>0.2.0</version>
    <date>2004-06-09</date>
