@@ -81,7 +81,8 @@ class HTTP_Header_Cache extends HTTP_Header
     function getCacheStart()
     {
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
-            return strtotime(array_shift(explode(';', $_SERVER['HTTP_IF_MODIFIED_SINCE'])));
+            return strtotime(array_shift(explode(';', 
+                $_SERVER['HTTP_IF_MODIFIED_SINCE'])));
         }
         return time();
     }
