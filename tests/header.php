@@ -8,10 +8,8 @@
 require_once 'PHPUnit.php';
 require_once 'HTTP/Header.php';
 
-class HTTP_HeaderTest extends PHPUnit_TestCase {
-
-    var $h;
-    
+class HTTP_HeaderTest extends PHPUnit_TestCase
+{
     function HTTP_HeaderTest($name)
     {
         $this->PHPUnit_TestCase($name);
@@ -224,8 +222,8 @@ class HTTP_HeaderTest extends PHPUnit_TestCase {
     } 
 } 
 
-$suite  = new PHPUnit_TestSuite('HTTP_HeaderTest');
-$result = PHPUnit::run($suite);
+$suite  = &new PHPUnit_TestSuite('HTTP_HeaderTest');
+$result = &PHPUnit::run($suite);
 echo $result->toString();
 
 ?>

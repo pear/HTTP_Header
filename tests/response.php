@@ -1,5 +1,4 @@
 <?php
-
 require_once 'HTTP/Header.php';
 
 $h = &new HTTP_Header;
