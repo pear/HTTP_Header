@@ -40,6 +40,9 @@ provided that handle special cases (i.e. HTTP_Header_Cache).
                     <file role="php">Cache.php</file>
                 </dir>
 
+                <dir name="docs">
+                    <file role="doc">Header_Cache.php</file>
+                </dir>
             </dir>
 
         </filelist> 
@@ -47,7 +50,6 @@ provided that handle special cases (i.e. HTTP_Header_Cache).
         <deps>
             <dep type="pkg" rel="ge" version="1.2">HTTP</dep>
         </deps>
-
 
     </release>
 </package>
