@@ -22,7 +22,7 @@ require_once 'HTTP.php';
 
 
 
-define( HTTP_HEADER_STATUS_304 , '304 Not modified' );
+define( 'HTTP_HEADER_STATUS_304' ,  '304 Not modified' );
 
 
 
@@ -133,6 +133,49 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
         print $dateTime->format(strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']));
 */
     }
+
+    /**
+    *   This function redirects the client. This is done by issuing
+    *   a Location: header and exiting.
+    *   Additionally to HTTP::redirect you can also add parameters to the url.
+    *   If you dont need parameters to be added, simply use
+    *       HTTP::redirect
+    *   otherwise
+    *       HTTP_Header::redirect
+    *       
+    *   @see    HTTP::redirect()
+    *   @author Wolfram Kriesing  <wk@visionp.de>
+    *   @param  string $url URL where the redirect should go to
+    *   @param  mixed   (1) true (default) - only the session-id will be added, this is very useful
+    *                       when using trans_sid<br>
+    *                   (2) false - no paras to add<br>
+    *                   (3) array - of parameter names, if the key is a string its assumed
+    *                       to be name=>value, otherwise the value is retreived using
+    *                       $GLOBALS['paraName']
+    */
+    function redirect($url,$param=true)
+    {
+        // true means add the session id only
+        if ($param === true) {
+            $param = array( session_name() => session_id() );
+        }
+        // add some other vars
+        if(is_array($param) && sizeof($param)) {
+            $paraString = array();
+            foreach ($param as $key=>$aParam) {
+                if (!is_string($key)) {
+                    $paraString[] = urlencode($aParam).'='.urlencode(@$GLOBALS[$aParam]);
+                } else {
+                    $paraString[] = urlencode($key).'='.urlencode($aParam);
+                }
+            }
+            $url .= '?'.implode('&',$paraString);
+        }
+
+        parent::redirect( $url );
+
+    }
+
 
 }
 ?>
