@@ -1,15 +1,11 @@
 <?php
 // +----------------------------------------------------------------------+
-// | PHP version 4.0                                                      |
+// | PEAR :: HTTP :: Header :: Cache                                      |
 // +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2004 The PHP Group                                |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2.0 of the PHP license,       |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available at through the world-wide-web at                           |
-// | http://www.php.net/license/2_02.txt.                                 |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
+// | This source file is subject to version 3.0 of the PHP license,       |
+// | that is available at http://www.php.net/license/3_0.txt              |
+// | If you did not receive a copy of the PHP license and are unable      |
+// | to obtain it through the world-wide-web, please send a note to       |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
 // | Authors: Wolfram Kriesing <wk@visionp.de>                            |
@@ -30,7 +26,15 @@ require_once 'HTTP/Header.php';
  * Which is done by sending the HTTP-Status "304 Not Modified", so that your
  * application load and the network traffic can be reduced, since you only need
  * to send the complete page once.  This is really an advantage e.g. for 
- * generated style sheets, or simply pages that do only change rarely. 
+ * generated style sheets, or simply pages that do only change rarely.
+ * 
+ * Usage:
+ * <code>
+ *  require_once 'HTTP/Header/Cache.php';
+ *  $httpCache = new HTTP_Header_Cache(4, 'weeks');
+ *  $httpCache->sendHeaders();
+ *  // your code goes here
+ * </code>
  * 
  * @package     HTTP_Header
  * @category    HTTP
