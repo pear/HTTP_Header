@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE package SYSTEM "../../php4/pear/package.dtd">
+<package version="1.0">
+    <name>HTTP_Header</name>
+    <summary>
+OO-Interface to modify HTTP-Headers easily,
+including some classes that handle common subjects (like Caching, etc.).
+    </summary>                                        
+
+    <description>
+This class provides methods to set/modify HTTP-Headers.
+To abstract common things, like caching etc. some sub classes are
+provided that handle special cases (i.e. HTTP_Header_Cache).
+    </description>
+
+    <maintainers>
+        <maintainer>
+            <user>cain</user>
+            <name>Wolfram Kriesing</name>
+            <email>wolfram@kriesing.de</email>
+            <role>lead</role>
+        </maintainer>
+    </maintainers>
+
+    <release>
+        <version>0.1</version>
+        <date>2003-01-17</date>
+        <license>PHP License</license>
+        <state>alpha</state>
+        <notes>
+            - initial release in PEAR
+        </notes>
+        <filelist>      
+
+            <dir name="/" baseinstalldir="HTTP">
+
+                <file role="php">Header.php</file>
+
+                <dir name="Header">
+                    <file role="php">Cache.php</file>
+                </dir>
+
+            </dir>
+
+        </filelist> 
+        
+        <deps>
+            <dep type="pkg" rel="ge" version="1.2">HTTP</dep>
+        </deps>
+
+
+    </release>
+</package>
