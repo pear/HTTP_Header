@@ -31,17 +31,14 @@ It also provides methods for checking Status types (i.e. HTTP_Header::isError())
   </maintainer>
  </maintainers>
  <release> 
-  <version>0.2.0</version>
-  <date>2004-06-09</date>
+  <version>0.3.0</version>
+  <date>2004-06-12</date>
   <license>PHP License</license>
   <state>beta</state>
   <notes>
 <![CDATA[
-* honor actual HTTP version
-* added accessors to HTTP version
-* check if headers were alread sent
-* marked dateToTimestamp() as deprecated
-* general code clean up
+* refactored HTTP_Header_Cache
+* fixed typos in HTTP_Header::dateToTimestamp()
 ]]>
   </notes>
   <filelist>
@@ -62,6 +59,19 @@ It also provides methods for checking Status types (i.e. HTTP_Header::isError())
   </deps>
  </release>
  <changelog>
+  <release>
+   <version>0.2.0</version>
+   <date>2004-06-09</date>
+   <license>PHP License</license>
+   <state>beta</state>
+   <notes>
+* honor actual HTTP version
+* added accessors to HTTP version
+* check if headers were alread sent
+* marked dateToTimestamp() as deprecated
+* general code clean up
+   </notes>
+  </release>
   <release> 
    <version>0.1.6</version>
    <date>2003-12-28</date>
