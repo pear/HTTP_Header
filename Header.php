@@ -241,7 +241,10 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
                     $paraString[] = urlencode($key).'='.urlencode($aParam);
                 }
             }
-            $url .= '?'.implode('&',$paraString);
+            // we need to know how to add the additional parameter, either with a & or a ?
+            $parsedUrl = parse_url($url);
+//FIXXXME this still causes a problem with (inproper) urls like: "http://php.net?" if just http_build_query() was already available :-)
+            $url .= (isset($parsedUrl['query'])?'&':'?').implode('&',$paraString);
         }
         parent::redirect($url);
     }
