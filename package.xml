@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.1">
-<!-- $Revision: 1.26 $ -->
+<!-- $Revision: 1.27 $ -->
 <package version="1.0">
  <name>HTTP_Header</name>
  <summary>
@@ -32,14 +32,13 @@ It also provides methods for checking Status types.
   </maintainer>
  </maintainers>
  <release>
-  <version>1.0.1</version>
-  <date>2004-08-04</date>
+  <version>1.0.2</version>
+  <date>2004-08-05</date>
   <license>PHP License</license>
   <state>stable</state>
   <notes>
 <![CDATA[
-* Don't append a question mark to redirection urls which have no query string
-* Fixed Header_Cache::isOlderThan() and Header_Cache::isCached() (finally)
+* Fixed Bug #2063
 ]]>
   </notes>
   <filelist>
@@ -62,6 +61,18 @@ It also provides methods for checking Status types.
   </deps>
  </release>
  <changelog>
+  <release>
+   <version>1.0.1</version>
+   <date>2004-08-04</date>
+   <license>PHP License</license>
+   <state>stable</state>
+   <notes>
+<![CDATA[
+* Don't append a question mark to redirection urls which have no query string
+* Fixed Header_Cache::isOlderThan() and Header_Cache::isCached() (finally)
+]]>
+   </notes>
+  </release>
   <release>
    <version>1.0.0</version>
    <date>2004-07-21</date>
