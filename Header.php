@@ -374,8 +374,10 @@ class HTTP_Header extends HTTP
         }
         
         $purl = parse_url($url);
-        $url .= (isset($purl['query']) ? '&' : '?') . implode('&', $qs);
-        
+        if ($qstr = implode('&', $qs)) {
+            $url .= (isset($purl['query']) ? '&' : '?') . $qstr;
+        }
+
         parent::redirect($url);
     }
 
