@@ -5,14 +5,12 @@
     <summary>
 		OO-Interface to modify and handle HTTP-Headers easily, including some classes that handle common subjects (like Caching, etc.).
     </summary>                                        
-
     <description>
 		This class provides methods to set/modify HTTP-Headers.
 		To abstract common things, like caching etc. some sub classes are
 		provided that handle special cases (i.e. HTTP_Header_Cache). Also provides
 		methods for checking Status types (i.e. HTTP_Header::isError())
     </description>
-
     <maintainers>
         <maintainer>
             <user>cain</user>
@@ -35,6 +33,7 @@
         <notes>
 			* Fixed Errors in sendStatusCode
 			* Fixed all HTTP_Header::isError (and similar) methods
+			* Fixed HTTP_Header::sendStatusCode
 		</notes>
         <filelist>
             <dir name="/" baseinstalldir="HTTP">
