@@ -38,6 +38,8 @@ require_once 'HTTP/Header.php';
  * 
  * @package     HTTP_Header
  * @category    HTTP
+ * @license     PHP License
+ * @access      public
  * @version     $Revision$
  */
 class HTTP_Header_Cache extends HTTP_Header
