@@ -57,6 +57,8 @@ It also provides methods for checking Status types (i.e. HTTP_Header::isError())
   </filelist>
   <deps>
    <dep type="pkg" rel="ge" version="1.2">HTTP</dep>
+   <dep type="pkg" rel="has">PEAR</dep>
+   <dep type="php" rel="ge" version="4.2.0"/>
   </deps>
  </release>
  <changelog>
