@@ -55,7 +55,7 @@ class HTTP_Header_CacheTest extends PHPUnit_TestCase
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(strtotime('yesterday'));
         $this->assertTrue($c->isCached(), 'last modified header');
         $this->assertFalse($c->isCached(time()), 'last modified header (yesterday) and param (now)');
-        $this->assertTrue($c->isCached(strtotime('last sunday')), 'last modified header (yesterday) and param (last sunday)');
+        $this->assertTrue($c->isCached(strtotime('last year')), 'last modified header (yesterday) and param (last year)');
         unset($c, $_SERVER['HTTP_IF_MODIFIED_SINCE']);
     } 
 
