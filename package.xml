@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE package SYSTEM "../../php4/pehttp://pear.php.net/dtd/package-1.0">
+<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
 <package version="1.0">
     <name>HTTP_Header</name>
     <summary>
-OO-Interface to modify HTTP-Headers easily, including some classes that handle common subjects (like Caching, etc.).
+		OO-Interface to modify and handle HTTP-Headers easily, including some classes that handle common subjects (like Caching, etc.).
     </summary>                                        
 
     <description>
-This class provides methods to set/modify HTTP-Headers.
-To abstract common things, like caching etc. some sub classes are
-provided that handle special cases (i.e. HTTP_Header_Cache).
+		This class provides methods to set/modify HTTP-Headers.
+		To abstract common things, like caching etc. some sub classes are
+		provided that handle special cases (i.e. HTTP_Header_Cache). Also provides
+		methods for checking Status types (i.e. HTTP_Header::isError())
     </description>
 
     <maintainers>
@@ -19,23 +20,23 @@ provided that handle special cases (i.e. HTTP_Header_Cache).
             <email>wolfram@kriesing.de</email>
             <role>lead</role>
         </maintainer>
+		<maintainer>
+            <user>davey</user>
+            <name>Davey Shafik</name>
+            <email>davey@php.net</email>
+            <role>lead</role>
+        </maintainer>
     </maintainers>
-
-    <release>
-    
-        <version>0.1.5</version>
-        <date>2003-12-09</date>
+    <release>    
+        <version>0.1.6</version>
+        <date>2003-12-28</date>
         <license>PHP License</license>
         <state>beta</state>
         <notes>
-* fix in redirect(), when parameter was added, it was always added with ?para=value, 
-  instead of checking if there was already a param
-* added quite some methods by Davey Shafik
-* changed HTTP_HEADER_STATUS_* content by Davey Shafik
-* added getStatusType() and getStatusText() by Davey Shafik
-        </notes>
+			* Fixed Errors in sendStatusCode
+			* Fixed all HTTP_Header::isError (and similar) methods
+		</notes>
         <filelist>
-
             <dir name="/" baseinstalldir="HTTP">
                 <file role="php">Header.php</file>
                 <dir name="Header">
@@ -46,32 +47,40 @@ provided that handle special cases (i.e. HTTP_Header_Cache).
                 </dir>
             </dir>
         </filelist>
-
         <deps>
             <dep type="pkg" rel="ge" version="1.2">HTTP</dep>
         </deps>
-
     </release>
-
     <changelog>
-        
+		<release>    
+			<version>0.1.5</version>
+			<date>2003-12-09</date>
+			<license>PHP License</license>
+			<state>beta</state>
+			<notes>
+				* fix in redirect(), when parameter was added, it was always added with ?para=value, 
+				instead of checking if there was already a param
+				* added quite some methods by Davey Shafik
+				* changed HTTP_HEADER_STATUS_* content by Davey Shafik
+				* added getStatusType() and getStatusText() by Davey Shafik
+			</notes>
+        </release>
         <release>
             <version>0.1.4</version>
             <date>2003-09-19</date>
             <license>PHP License</license>
             <state>beta</state>
             <notes>
-    * redirect sends session id by default when trans_sid=1, behaviour has changed!
+				* redirect sends session id by default when trans_sid=1, behaviour has changed!
             </notes>
-        </release>
-        
+        </release>        
         <release>
             <version>0.1.3</version>
             <date>2003-03-31</date>
             <license>PHP License</license>
             <state>beta</state>
             <notes>
-    * fixed dateToTimestamp() to retrieve proper cache date
+				* fixed dateToTimestamp() to retrieve proper cache date
             </notes>
         </release>
         <release>
