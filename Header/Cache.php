@@ -59,13 +59,7 @@ class HTTP_Header_Cache extends HTTP_Header
         parent::HTTP_Header();
         $this->setHeader('Pragma', 'cache');
         $this->setHeader('Last-Modified', $this->getCacheStart());
-        
-        if (isset($_SESSION)) {
-            $this->setHeader('ETag', '"'. session_id() .'"');
-            $this->setHeader('Cache-Control', 'private');
-        } else {
-            $this->setHeader('Cache-Control', 'public');
-        }
+        $this->setHeader('Cache-Control', 'public');
         
         if ($expires && !$this->isOlderThan($expires, $unit)) {
             $this->exitIfCached();
@@ -167,10 +161,6 @@ class HTTP_Header_Cache extends HTTP_Header
      */
     function isCached($lastModified = 0)
     {
-        if (    isset($_SESSION, $_SERVER['HTTP_IF_NONE_MATCH']) &&
-                '"'. session_id() .'"' != $_SERVER['HTTP_IF_NONE_MATCH']) {
-            return false;
-        }
         if (!isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
             return false;
         }
@@ -189,10 +179,12 @@ class HTTP_Header_Cache extends HTTP_Header
     function exitIfCached()
     {
         if ($this->isCached()) {
+            $this->setHeader('X-HTTP-Cache', 'Hit');
             $this->sendHeaders();
             $this->sendStatusCode(304);
             exit;
         }
+        $this->setHeader('X-HTTP-Cache', 'Miss');
     }
     
     /**
