@@ -19,12 +19,68 @@
 
 require_once 'PEAR.php';
 require_once 'HTTP.php';
+                          
 
+// Information Codes
 
+define('HTTP_HEADER_STATUS_100', '100 Continue');
+define('HTTP_HEADER_STATUS_101', '101 Switching Protocols'); 
+define('HTTP_HEADER_STATUS_102', '102 Processing');
 
-define( 'HTTP_HEADER_STATUS_304' ,  '304 Not modified' );
+// Success Codes
 
+define('HTTP_HEADER_STATUS_200', '200 OK'); 
+define('HTTP_HEADER_STATUS_201', '201 Created'); 
+define('HTTP_HEADER_STATUS_202', '202 Accepted'); 
+define('HTTP_HEADRE_STATUS_203', '203 Non-Authoriative Information'); 
+define('HTTP_HEADER_STATUS_204', '204 No Content'); 
+define('HTTP_HEADER_STATUS_205', '205 Reset Content'); 
+define('HTTP_HEADER_STATUS_206', '206 Partial Content'); 
+define('HTTP_HEADER_STATUS_207', '207 Multi-Status');
 
+// Redirection Codes
+
+define('HTTP_HEADER_STATUS_300', '300 Multiple Choices'); 
+define('HTTP_HEADER_STATUS_301', '301 Moved Permanently'); 
+define('HTTP_HEADER_STATUS_302', '302 Found'); 
+define('HTTP_HEADER_STATUS_303', '303 See Other'); 
+define('HTTP_HEADER_STATUS_304', '304 Not Modified'); 
+define('HTTP_HEADER_STATUS_305', '305 Use Proxy'); 
+define('HTTP_HEADER_STATUS_307', '307 Temporary Redirect');
+
+// Error Codes
+
+define('HTTP_HEADER_STATUS_400', '400 Bad Request'); 
+define('HTTP_HEADER_STATUS_401', '401 Unauthorized'); 
+define('HTTP_HEADER_STATUS_402', '402 Payment Granted'); 
+define('HTTP_HEADER_STATUS_403', '403 Forbidden'); 
+define('HTTP_HEADER_STATUS_404', '404 File Not Found'); 
+define('HTTP_HEADER_STATUS_405', '405 Method Not Allowed'); 
+define('HTTP_HEADER_STATUS_406', '406 Not Acceptable'); 
+define('HTTP_HEADER_STATUS_407', '407 Proxy Authentication Required'); 
+define('HTTP_HEADER_STATUS_408', '408 Request Time-out'); 
+define('HTTP_HEADER_STATUS_409', '409 Conflict'); 
+define('HTTP_HEADER_STATUS_410', '410 Gone'); 
+define('HTTP_HEADER_STATUS_411', '411 Length Required'); 
+define('HTTP_HEADER_STATUS_412', '412 Precondition Failed'); 
+define('HTTP_HEADER_STATUS_413', '413 Request Entity Too Large'); 
+define('HTTP_HEADER_STATUS_414', '414 Request-URI Too Large'); 
+define('HTTP_HEADER_STATUS_415', '415 Unsupported Media Type'); 
+define('HTTP_HEADER_STATUS_416', '416 Requested range not satisfiable'); 
+define('HTTP_HEADER_STATUS_417', '417 Expectation Failed'); 
+define('HTTP_HEADER_STATUS_422', '422 Unprocessable Entity');
+
+define('HTTP_HEADER_STATUS_423', '423 Locked'); 
+define('HTTP_HEADER_STATUS_424', '424 Failed Dependency');
+
+// Server Errors
+
+define('HTTP_HEADER_STATUS_500', '500 Internal Server Error');
+define('HTTP_HEADER_STATUS_501', '501 Not Implemented');
+define('HTTP_HEADER_STATUS_502', '502 Overloaded');
+define('HTTP_HEADER_STATUS_503', '503 Gateway Timeout');
+define('HTTP_HEADER_STATUS_505', '505 HTTP Version not supported');
+define('HTTP_HEADER_STATUS_507', '507 Insufficient Storage');
 
 /**
 *
