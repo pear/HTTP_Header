@@ -28,6 +28,7 @@ provided that handle special cases (i.e. HTTP_Header_Cache).
         <state>alpha</state>
         <notes>
             - if redirect has no params given redirect to PHP_SELF
+            - Cache::exitIfCached() returns false if isCached() is false
         </notes>
         <filelist>
 
