@@ -17,77 +17,82 @@
 // +----------------------------------------------------------------------+//
 // $Id$
 
-require_once 'PEAR.php';
 require_once 'HTTP.php';
-                          
+
 
 // Information Codes
 
-define('HTTP_HEADER_STATUS_100', '100 Continue');
-define('HTTP_HEADER_STATUS_101', '101 Switching Protocols');
-define('HTTP_HEADER_STATUS_102', '102 Processing');
+define('HTTP_HEADER_STATUS_100', 'Continue');
+define('HTTP_HEADER_STATUS_101', 'Switching Protocols');
+define('HTTP_HEADER_STATUS_102', 'Processing');
+define('HTTP_HEADER_STATUS_INFORMATIONAL',1);
 
 // Success Codes
 
-define('HTTP_HEADER_STATUS_200', '200 OK'); 
-define('HTTP_HEADER_STATUS_201', '201 Created'); 
-define('HTTP_HEADER_STATUS_202', '202 Accepted'); 
-define('HTTP_HEADER_STATUS_203', '203 Non-Authoriative Information'); 
-define('HTTP_HEADER_STATUS_204', '204 No Content'); 
-define('HTTP_HEADER_STATUS_205', '205 Reset Content'); 
-define('HTTP_HEADER_STATUS_206', '206 Partial Content'); 
-define('HTTP_HEADER_STATUS_207', '207 Multi-Status');
+define('HTTP_HEADER_STATUS_200', 'OK');
+define('HTTP_HEADER_STATUS_201', 'Created');
+define('HTTP_HEADER_STATUS_202', 'Accepted');
+define('HTTP_HEADER_STATUS_203', 'Non-Authoriative Information');
+define('HTTP_HEADER_STATUS_204', 'No Content');
+define('HTTP_HEADER_STATUS_205', 'Reset Content');
+define('HTTP_HEADER_STATUS_206', 'Partial Content');
+define('HTTP_HEADER_STATUS_207', 'Multi-Status');
+define('HTTP_HEADER_STATUS_SUCCESSFUL',2);
 
 // Redirection Codes
 
-define('HTTP_HEADER_STATUS_300', '300 Multiple Choices'); 
-define('HTTP_HEADER_STATUS_301', '301 Moved Permanently'); 
-define('HTTP_HEADER_STATUS_302', '302 Found'); 
-define('HTTP_HEADER_STATUS_303', '303 See Other'); 
-define('HTTP_HEADER_STATUS_304', '304 Not Modified'); 
-define('HTTP_HEADER_STATUS_305', '305 Use Proxy'); 
-define('HTTP_HEADER_STATUS_307', '307 Temporary Redirect');
+define('HTTP_HEADER_STATUS_300', 'Multiple Choices');
+define('HTTP_HEADER_STATUS_301', 'Moved Permanently');
+define('HTTP_HEADER_STATUS_302', 'Found');
+define('HTTP_HEADER_STATUS_303', 'See Other');
+define('HTTP_HEADER_STATUS_304', 'Not Modified');
+define('HTTP_HEADER_STATUS_305', 'Use Proxy');
+define('HTTP_HEADER_STATUS_306','(Unused)');
+define('HTTP_HEADER_STATUS_307', 'Temporary Redirect');
+define('HTTP_HEADER_STATUS_REDIRECT',3);
 
 // Error Codes
 
-define('HTTP_HEADER_STATUS_400', '400 Bad Request'); 
-define('HTTP_HEADER_STATUS_401', '401 Unauthorized'); 
-define('HTTP_HEADER_STATUS_402', '402 Payment Granted'); 
-define('HTTP_HEADER_STATUS_403', '403 Forbidden'); 
-define('HTTP_HEADER_STATUS_404', '404 File Not Found'); 
-define('HTTP_HEADER_STATUS_405', '405 Method Not Allowed'); 
-define('HTTP_HEADER_STATUS_406', '406 Not Acceptable'); 
-define('HTTP_HEADER_STATUS_407', '407 Proxy Authentication Required'); 
-define('HTTP_HEADER_STATUS_408', '408 Request Time-out'); 
-define('HTTP_HEADER_STATUS_409', '409 Conflict'); 
-define('HTTP_HEADER_STATUS_410', '410 Gone'); 
-define('HTTP_HEADER_STATUS_411', '411 Length Required'); 
-define('HTTP_HEADER_STATUS_412', '412 Precondition Failed'); 
-define('HTTP_HEADER_STATUS_413', '413 Request Entity Too Large'); 
-define('HTTP_HEADER_STATUS_414', '414 Request-URI Too Large'); 
-define('HTTP_HEADER_STATUS_415', '415 Unsupported Media Type'); 
-define('HTTP_HEADER_STATUS_416', '416 Requested range not satisfiable'); 
-define('HTTP_HEADER_STATUS_417', '417 Expectation Failed'); 
-define('HTTP_HEADER_STATUS_422', '422 Unprocessable Entity');
-
-define('HTTP_HEADER_STATUS_423', '423 Locked'); 
-define('HTTP_HEADER_STATUS_424', '424 Failed Dependency');
+define('HTTP_HEADER_STATUS_400', 'Bad Request');
+define('HTTP_HEADER_STATUS_401', 'Unauthorized');
+define('HTTP_HEADER_STATUS_402', 'Payment Granted');
+define('HTTP_HEADER_STATUS_403', 'Forbidden');
+define('HTTP_HEADER_STATUS_404', 'File Not Found');
+define('HTTP_HEADER_STATUS_405', 'Method Not Allowed');
+define('HTTP_HEADER_STATUS_406', 'Not Acceptable');
+define('HTTP_HEADER_STATUS_407', 'Proxy Authentication Required');
+define('HTTP_HEADER_STATUS_408', 'Request Time-out');
+define('HTTP_HEADER_STATUS_409', 'Conflict');
+define('HTTP_HEADER_STATUS_410', 'Gone');
+define('HTTP_HEADER_STATUS_411', 'Length Required');
+define('HTTP_HEADER_STATUS_412', 'Precondition Failed');
+define('HTTP_HEADER_STATUS_413', 'Request Entity Too Large');
+define('HTTP_HEADER_STATUS_414', 'Request-URI Too Large');
+define('HTTP_HEADER_STATUS_415', 'Unsupported Media Type');
+define('HTTP_HEADER_STATUS_416', 'Requested range not satisfiable');
+define('HTTP_HEADER_STATUS_417', 'Expectation Failed');
+define('HTTP_HEADER_STATUS_422', 'Unprocessable Entity');
+define('HTTP_HEADER_STATUS_423', 'Locked');
+define('HTTP_HEADER_STATUS_424', 'Failed Dependency');
+define('HTTP_HEADER_STATUS_CLIENT_ERROR',4);
 
 // Server Errors
 
-define('HTTP_HEADER_STATUS_500', '500 Internal Server Error');
-define('HTTP_HEADER_STATUS_501', '501 Not Implemented');
-define('HTTP_HEADER_STATUS_502', '502 Overloaded');
-define('HTTP_HEADER_STATUS_503', '503 Gateway Timeout');
-define('HTTP_HEADER_STATUS_505', '505 HTTP Version not supported');
-define('HTTP_HEADER_STATUS_507', '507 Insufficient Storage');
+define('HTTP_HEADER_STATUS_500','Internal Server Error');
+define('HTTP_HEADER_STATUS_501','Not Implemented');
+define('HTTP_HEADER_STATUS_502','Bad Gateway');
+define('HTTP_HEADER_STATUS_503','Service Unavailable');
+define('HTTP_HEADER_STATUS_504','Gateway Timeout');
+define('HTTP_HEADER_STATUS_505','HTTP Version Not Supported');
+define('HTTP_HEADER_STATUS_507', 'Insufficient Storage');
+define('HTTP_HEADER_STATUS_SERVER_ERROR',5);
 
 /**
 *
 */
 class HTTP_Header extends HTTP
 {
-                                                  
+
     /**
     *   the values that are set as default, are the same as PHP sends by default
     *
@@ -144,28 +149,27 @@ class HTTP_Header extends HTTP
     *   @param  array   the keys that shall be sent, if the array is empty all
     *                   the headers will be sent (all headers that you would get vie $this->getHeader())
     */
-    function sendHeaders ( $keys=array() )
+    function sendHeaders( $keys=array())
     {
         foreach ( $this->_headers as $key=>$value ) {
             header( "$key: $value" );
         }
     }
-                          
+
     /**
     *
     *
     */
-    function sendStatusCode ( $code )
+    function sendStatusCode( $code)
     {
-        if ( is_int($code) ) {
-            // if the $code is an int we get the constant here
-            // is there an easier way to build a constant dynamically?
-            eval("\$code = HTTP_HEADER_STATUS_".$code.';');
+        if (defined('HTTP_HEADER_STATUS_' .$code)) {
+            $status_msg = constant('HTTP_HEADER_STATUS_' .$code);
+            header( 'HTTP/'.$this->_httpVersion. ' ' .$code. ' ' .$status_msg);
+        } else {
+            return false;
         }
-
-        header( 'HTTP/'.$this->_httpVersion.' '.$code );
     }
-                                   
+
     /**
     *   converts dates like
     *       Mon, 31 Mar 2003 15:26:34 GMT
@@ -173,21 +177,21 @@ class HTTP_Header extends HTTP
     *   into a timestamp, strtotime doesnt do it :-(
     */
     function dateToTimestamp($date)
-    {                                      
+    {
         $months = array_flip(array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'));
 
-// this was converted, i dont know why    January, 17-Fri-03 14:49:43 GMT   
+// this was converted, i dont know why    January, 17-Fri-03 14:49:43 GMT
 //        preg_match( '~([^,]*),\s(\d+)-...-(\d+)\s(\d+):(\d+):(\d+).*~' , $date , $splitDate );
-        
-        // this returns: 
+
+        // this returns:
         // for  Mon, 31 Mar 2003 15:42:55 GMT
-        //  Array ( [0] => Mon, 31 Mar 2003 15:42:55 GMT 
+        //  Array ( [0] => Mon, 31 Mar 2003 15:42:55 GMT
         //          [1] => 31 [2] => Mar [3] => 2003 [4] => 15 [5] => 42 [6] => 55 )
         preg_match('~[^,]*,\s(\d+)\s(\w+)\s(\d+)\s(\d+):(\d+):(\d+).*~',$date,$splitDate);
 //        $splitDate[1] = substr($splitDate[1],0,3);
         $timestamp = mktime($splitDate[4],$splitDate[5],$splitDate[6],
                             $months[$splitDate[2]]+1,$splitDate[1],$splitDate[3]);
-        
+
         return $timestamp;
 //        $dateTime = new I18N_DateTime('de');
 //print $dateTime->format($timestamp);
@@ -207,7 +211,7 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
     *       HTTP::redirect
     *   otherwise
     *       HTTP_Header::redirect
-    *       
+    *
     *   @see    HTTP::redirect()
     *   @author Wolfram Kriesing  <wk@visionp.de>
     *   @param  string $url URL where the redirect should go to
@@ -220,7 +224,7 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
     *                       to be name=>value, otherwise the value is retreived using
     *                       $GLOBALS['paraName']
     */
-    function redirect($url=null,$param=null)
+    function redirect( $url=null, $param=null)
     {
         if ($url===null) {
             $url = $_SERVER['PHP_SELF'];
@@ -242,6 +246,144 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
         parent::redirect($url);
     }
 
+    /**#@+
+     * @author Davey Shafik <davey@php.net>
+     * @param int $http_code HTTP Code to check
+     */
+
+    /**
+     * Return HTTP Status Code Type
+     *
+     * @return int|false
+     */
+
+    function statusType($http_code) 
+    {
+        if(defined('HTTP_HEADER_STATUS_' .$http_code)) {
+            $type = substr($http_code,0,1);
+            switch ($type) {
+                case HTTP_HEADER_STATUS_INFORMATIONAL:
+                case HTTP_HEADER_STATUS_SUCCESSFUL:
+                case HTTP_HEADER_STATUS_REDIRECT:
+                case HTTP_HEADER_STATUS_CLIENT_ERROR:
+                case HTTP_HEADER_STATUS_SERVER_ERROR:
+                    return $type;
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Return Status Code Message
+     *
+     * @return string|false
+     */
+
+    function statusText($http_code) 
+    {
+        if ($this->statusType($http_code)) {
+            return constant('HTTP_HEADER_STATUS_' .$http_code);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if HTTP Status code is Information (1xx)
+     *
+     * @return boolean
+     */
+
+    function isInformational($http_code) 
+    {
+        if ($status_type = $this->statusType($http_code)) {
+            return $status_type{0} == HTTP_HEADER_STATUS_INFORMATIONAL;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if HTTP Status code is Successful (2xx)
+     *
+     * @return boolean
+     */
+
+    function isSuccessful($http_code) 
+    {
+        if ($status_type = $this->statusType($http_code)) {
+            return $status_type{0} == HTTP_HEADER_STATUS_SUCCESSFUL;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if HTTP Status code is a Redirect (3xx)
+     *
+     * @return boolean
+     */
+
+    function isRedirect($http_code) 
+    {
+        if ($status_type = $this->statusType($http_code)) {
+            return $status_type{0} == HTTP_HEADER_STATUS_REDIRECT;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if HTTP Status code is a Client Error (4xx)
+     *
+     * @return boolean
+     */
+
+    function isClientError($http_code) 
+    {
+        if ($status_type = $this->statusType($http_code)) {
+            return $status_type{0} == HTTP_HEADER_STATUS_CLIENT_ERROR;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if HTTP Status code is Server Error (5xx)
+     *
+     * @return boolean
+     */
+
+    function isServerError($http_code) 
+    {
+        if ($status_type = $this->statusType($http_code)) {
+            return $status_type{0} == HTTP_HEADER_STATUS_SERVER_ERROR;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if HTTP Status code is Server OR Client Error (4xx or 5xx)
+     *
+     * @return boolean
+     */
+
+    function isError($http_code) 
+    {
+        if ($status_type = $this->statusType($http_code)) {
+            return (($status_type == HTTP_HEADER_STATUS_CLIENT_ERROR) || ($status_type == HTTP_HEADER_STATUS_SERVER_ERROR)) ? true : false;
+        } else {
+            return false;
+        }
+    }
+
+    /**#@-*/
 
 }
 ?>
