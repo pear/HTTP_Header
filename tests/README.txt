@@ -7,6 +7,7 @@ accessible webfolder and adjust the script locations
 in the setUp() methods of header.php and header_cache.php
 
 Now run header.php and header_cache.php with PHPUnit
-and HTTP_Request installed.
+and HTTP_Request installed.  The caching test will
+take about 10 seconds.
 
 Please report any issues at http://pear.php.net/bugs
