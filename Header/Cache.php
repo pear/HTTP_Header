@@ -110,6 +110,11 @@ class HTTP_Header_Cache extends HTTP_Header
     *   this method exits the script if the page is
     *   still cached by the user agent, the condition
     *   if given will be AND-ed to the 'isCached' call
+    *   Since it returns false in case the page is not cached you can also use it in an
+    *   if. for example:
+    *       if (!$httpCache->exitIfCached()) {
+    *           do stuff here in case it is not cached
+    *       }
     *
     *   @param  boolean     will be AND-ed to the 'isCached' call
     */
@@ -120,6 +125,7 @@ class HTTP_Header_Cache extends HTTP_Header
             $this->sendStatusCode(304);
             exit;
         }
+        return false;
     }
 
 
