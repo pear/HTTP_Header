@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.1">
-<!-- $Revision: 1.22 $ -->
+<!-- $Revision: 1.23 $ -->
 <package version="1.0">
  <name>HTTP_Header</name>
  <summary>
@@ -33,13 +33,16 @@ It also provides methods for checking Status types.
  </maintainers>
  <release>
   <version>1.0.0</version>
-  <date>2004-07-15</date>
+  <date>2004-07-19</date>
   <license>PHP License</license>
   <state>stable</state>
   <notes>
+<![CDATA[
 * Call parent constructor in HTTP_Header_Cache
 * Fixed Bug in HTTP_Header_Cache::isCached()
+* Fixed Bug #1908 (added optional parameter $session to redirect())
 + Added PHPUnit test cases
+]]>
   </notes>
   <filelist>
    <dir name="/" baseinstalldir="HTTP">
