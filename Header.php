@@ -154,8 +154,10 @@ class HTTP_Header extends HTTP
     function sendHeaders($keys=array())
     {
         foreach ($this->_headers as $key=>$value) {
-            if ($keys && in_array($key,$keys))  {
-                header("$key: $value");
+            if ($keys) {
+                if (in_array($key,$keys))  {
+                    header("$key: $value");
+                }
             } else {
                 header("$key: $value");
             }
