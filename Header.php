@@ -24,7 +24,7 @@ require_once 'HTTP.php';
 // Information Codes
 
 define('HTTP_HEADER_STATUS_100', '100 Continue');
-define('HTTP_HEADER_STATUS_101', '101 Switching Protocols'); 
+define('HTTP_HEADER_STATUS_101', '101 Switching Protocols');
 define('HTTP_HEADER_STATUS_102', '102 Processing');
 
 // Success Codes
@@ -32,7 +32,7 @@ define('HTTP_HEADER_STATUS_102', '102 Processing');
 define('HTTP_HEADER_STATUS_200', '200 OK'); 
 define('HTTP_HEADER_STATUS_201', '201 Created'); 
 define('HTTP_HEADER_STATUS_202', '202 Accepted'); 
-define('HTTP_HEADRE_STATUS_203', '203 Non-Authoriative Information'); 
+define('HTTP_HEADER_STATUS_203', '203 Non-Authoriative Information'); 
 define('HTTP_HEADER_STATUS_204', '204 No Content'); 
 define('HTTP_HEADER_STATUS_205', '205 Reset Content'); 
 define('HTTP_HEADER_STATUS_206', '206 Partial Content'); 
