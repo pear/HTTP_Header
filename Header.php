@@ -145,20 +145,30 @@ class HTTP_Header extends HTTP
     }
 
     /**
+    * Send out the header that you set via setHeader(). If the parameter $keys
+    * is given only the headers given in there will be sent.
     *
-    *   @param  array   the keys that shall be sent, if the array is empty all
-    *                   the headers will be sent (all headers that you would get vie $this->getHeader())
+    * @param array the keys that shall be sent, if the array is empty all
+    *  the headers will be sent (all headers that you would get vie $this->getHeader())
     */
     function sendHeaders($keys=array())
     {
         foreach ($this->_headers as $key=>$value) {
-            header("$key: $value");
+            if ($keys && in_array($key,$keys))  {
+                header("$key: $value");
+            } else {
+                header("$key: $value");
+            }
         }
     }
 
     /**
+    * Send out the given HTTP-Status code.
+    * Use this for example when you want to tell the client this page is
+    * cached, then you would call sendStatusCode(304), 
+    * see HTTP_Header_Cache::exitIfCached() for example usage.
     *
-    *
+    * @param int the status code to be sent, i.e. 404, 304, 200, etc.
     */
     function sendStatusCode( $code)
     {
@@ -174,7 +184,10 @@ class HTTP_Header extends HTTP
     *   converts dates like
     *       Mon, 31 Mar 2003 15:26:34 GMT
     *       Tue, 15 Nov 1994 12:45:26 GMT
-    *   into a timestamp, strtotime doesnt do it :-(
+    *   into a timestamp, strtotime() doesnt do it :-(
+    *
+    * @param string the data to be converted
+    * @return int the unix-timestamp
     */
     function dateToTimestamp($date)
     {
