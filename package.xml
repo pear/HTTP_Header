@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<!-- $Revision: 1.18 $ -->
+<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.1">
+<!-- $Revision: 1.19 $ -->
 <package version="1.0">
  <name>HTTP_Header</name>
  <summary>
