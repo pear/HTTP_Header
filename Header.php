@@ -176,7 +176,7 @@ class HTTP_Header extends HTTP
     {
         if (is_int($code) && defined('HTTP_HEADER_STATUS_' .$code)) {
             $status_msg = constant('HTTP_HEADER_STATUS_' .$code);
-            header('HTTP/'.$this->_httpVersion. ' ' .$code. ' ' .$status_msg);
+            header('HTTP/'.$this->_httpVersion. ' ' .$status_msg);
         } else {
             header('HTTP/'.$this->_httpVersion. ' ' .$code);
         }
