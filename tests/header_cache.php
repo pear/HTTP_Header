@@ -41,11 +41,11 @@ class HTTP_Header_CacheTest extends PHPUnit_TestCase
     function testisOlderThan()
     {
         $c = &new HTTP_Header_Cache;
-        $this->assertFalse($c->isOlderThan(1, 'second'));
-        $this->assertFalse($c->isOlderThan(1, 'hour'));
-        sleep(2);
         $this->assertTrue($c->isOlderThan(1, 'second'));
-        unset($c);
+        $this->assertTrue($c->isOlderThan(1, 'hour'));
+        $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(time() - 3);
+        $this->assertTrue($c->isOlderThan(1, 'second'));
+        unset($c, $_SERVER['HTTP_IF_MODIFIED_SINCE']);
     } 
 
     function testisCached()
