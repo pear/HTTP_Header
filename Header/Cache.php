@@ -167,15 +167,15 @@ class HTTP_Header_Cache extends HTTP_Header
      */
     function isCached($lastModified = 0)
     {
+        if (    isset($_SESSION, $_SERVER['HTTP_IF_NONE_MATCH']) &&
+                '"'. session_id() .'"' != $_SERVER['HTTP_IF_NONE_MATCH']) {
+            return false;
+        }
         if (!isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
             return false;
         }
         if (!$lastModified) {
             return true;
-        }
-        if (    isset($_SESSION, $_SERVER['HTTP_IF_NONE_MATCH']) &&
-                '"'. session_id() .'"' != $_SERVER['HTTP_IF_NONE_MATCH']) {
-            return false;
         }
         return $lastModified < $this->getCacheStart();
     }
