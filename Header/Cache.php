@@ -59,7 +59,7 @@ class HTTP_Header_Cache extends HTTP_Header
         parent::HTTP_Header();
         $this->setHeader('Pragma', 'cache');
         $this->setHeader('Last-Modified', $this->getCacheStart());
-        $this->setHeader('Cache-Control', 'public');
+        $this->setHeader('Cache-Control', 'private, must-revalidate, max-age=0');
         
         if ($expires) {
             if (!$this->isOlderThan($expires, $unit)) {
