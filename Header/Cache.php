@@ -30,7 +30,7 @@ require_once 'HTTP/Header.php';
  * Which is done by sending the HTTP-Status "304 Not Modified", so that your
  * application load and the network traffic can be reduced, since you only need
  * to send the complete page once.  This is really an advantage e.g. for 
- * generated style sheet, or simply pages that do only change rarely. 
+ * generated style sheets, or simply pages that do only change rarely. 
  * 
  * @package     HTTP_Header
  * @category    HTTP
@@ -71,7 +71,7 @@ class HTTP_Header_Cache extends HTTP_Header
     function getCacheStart()
     {
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
-            return strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']));
+            return strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
         }
         return time();
     }
