@@ -158,7 +158,7 @@ class HTTP_Header extends HTTP
         if ($version < 1.0 || $version > 1.1) {
             return false;
         }
-        $this->_httpVersion = (string) $version;
+        $this->_httpVersion = sprintf('%0.1f', $version);
         return true;
     }
     
