@@ -23,12 +23,12 @@ provided that handle special cases (i.e. HTTP_Header_Cache).
 
     <release>
         <version>0.1.2</version>
-        <date>2003-0-</date>
+        <date>2003-03-10</date>
         <license>PHP License</license>
-        <state>alpha</state>
+        <state>beta</state>
         <notes>
-            - if redirect has no params given redirect to PHP_SELF
-            - Cache::exitIfCached() returns false if isCached() is false
+            * if redirect has no params given, redirect to PHP_SELF
+            * Cache::exitIfCached() returns false if isCached() is false
         </notes>
         <filelist>
 
