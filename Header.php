@@ -99,6 +99,7 @@ define('HTTP_HEADER_STATUS_SERVER_ERROR',5);
  * 
  * @package     HTTP_Header
  * @category    HTTP
+ * @license     PHP License
  * @access      public
  * @version     $Revision$
  */
