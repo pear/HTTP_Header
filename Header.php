@@ -22,8 +22,8 @@
 require_once 'HTTP.php';
 
 /**#@+
-* Information Codes
-*/
+ * Information Codes
+ */
 define('HTTP_HEADER_STATUS_100', '100 Continue');
 define('HTTP_HEADER_STATUS_101', '101 Switching Protocols');
 define('HTTP_HEADER_STATUS_102', '102 Processing');
@@ -31,8 +31,8 @@ define('HTTP_HEADER_STATUS_INFORMATIONAL',1);
 /**#@-*/
 
 /**#+
-* Success Codes
-*/
+ * Success Codes
+ */
 define('HTTP_HEADER_STATUS_200', '200 OK');
 define('HTTP_HEADER_STATUS_201', '201 Created');
 define('HTTP_HEADER_STATUS_202', '202 Accepted');
@@ -45,8 +45,8 @@ define('HTTP_HEADER_STATUS_SUCCESSFUL',2);
 /**#@-*/
 
 /**#@+
-* Redirection Codes
-*/
+ * Redirection Codes
+ */
 define('HTTP_HEADER_STATUS_300', '300 Multiple Choices');
 define('HTTP_HEADER_STATUS_301', '301 Moved Permanently');
 define('HTTP_HEADER_STATUS_302', '302 Found');
@@ -59,8 +59,8 @@ define('HTTP_HEADER_STATUS_REDIRECT',3);
 /**#@-*/
 
 /**#@+
-* Error Codes
-*/
+ * Error Codes
+ */
 define('HTTP_HEADER_STATUS_400', '400 Bad Request');
 define('HTTP_HEADER_STATUS_401', '401 Unauthorized');
 define('HTTP_HEADER_STATUS_402', '402 Payment Granted');
@@ -86,8 +86,8 @@ define('HTTP_HEADER_STATUS_CLIENT_ERROR',4);
 /**#@-*/
 
 /**#@+
-* Server Errors
-*/
+ * Server Errors
+ */
 define('HTTP_HEADER_STATUS_500', '500 Internal Server Error');
 define('HTTP_HEADER_STATUS_501', '501 Not Implemented');
 define('HTTP_HEADER_STATUS_502', '502 Bad Gateway');
@@ -99,23 +99,23 @@ define('HTTP_HEADER_STATUS_SERVER_ERROR',5);
 /**#@-*/
 
 /**
-* HTTP_Header
-* 
-* @package      HTTP_Header
-* @category     HTTP
-* @access       public
-* @version      $Revision$
-*/
+ * HTTP_Header
+ * 
+ * @package     HTTP_Header
+ * @category    HTTP
+ * @access      public
+ * @version     $Revision$
+ */
 class HTTP_Header extends HTTP
 {
     /**
-    * Default Headers
-    * 
-    * The values that are set as default, are the same as PHP sends by default.
-    * 
-    * @var      array
-    * @access   private
-    */
+     * Default Headers
+     * 
+     * The values that are set as default, are the same as PHP sends by default.
+     * 
+     * @var     array
+     * @access  private
+     */
     var $_headers = array(
         'content-type'  =>  'text/html',
         'pragma'        =>  'no-cache',
@@ -123,21 +123,21 @@ class HTTP_Header extends HTTP
     );
 
     /**
-    * HTTP version
-    * 
-    * @var      string
-    * @access   private
-    */
+     * HTTP version
+     * 
+     * @var     string
+     * @access  private
+     */
     var $_httpVersion = '1.0';
 
     /**
-    * Constructor
-    *
-    * Sets HTTP version.
-    * 
-    * @access   public
-    * @return   object  HTTP_Header
-    */
+     * Constructor
+     *
+     * Sets HTTP version.
+     * 
+     * @access  public
+     * @return  object  HTTP_Header
+     */
     function HTTP_Header()
     {
         if (isset($_SERVER['SERVER_PROTOCOL'])) {
@@ -146,13 +146,13 @@ class HTTP_Header extends HTTP
     }
     
     /**
-    * Set HTTP version
-    *
-    * @access   public
-    * @return   bool    Returns true on success or false if version doesn't 
-    *                   match 1.0 or 1.1 (note: 1 will result in 1.0)
-    * @param    mixed   $version HTTP version, either 1.0 or 1.1
-    */
+     * Set HTTP version
+     *
+     * @access  public
+     * @return  bool    Returns true on success or false if version doesn't 
+     *                  match 1.0 or 1.1 (note: 1 will result in 1.0)
+     * @param   mixed   $version HTTP version, either 1.0 or 1.1
+     */
     function setHttpVersion($version)
     {
         $version = round((float) $version, 1);
@@ -164,28 +164,28 @@ class HTTP_Header extends HTTP
     }
     
     /**
-    * Get HTTP version
-    *
-    * @access   public
-    * @return   string
-    */
+     * Get HTTP version
+     *
+     * @access  public
+     * @return  string
+     */
     function getHttpVersion()
     {
         return $this->_httpVersion;
     }
     
     /**
-    * Set Header
-    * 
-    * The default value for the Last-Modified header will be current
-    * date and atime if $value is omitted.
-    * 
-    * @access   public
-    * @return   bool    Returns true on success or false if $key was empty or
-    *                   $value was not of an scalar type.
-    * @param    string  $key The name of the header
-    * @param    string  $value The value of the header
-    */
+     * Set Header
+     * 
+     * The default value for the Last-Modified header will be current
+     * date and atime if $value is omitted.
+     * 
+     * @access  public
+     * @return  bool    Returns true on success or false if $key was empty or
+     *                  $value was not of an scalar type.
+     * @param   string  $key The name of the header.
+     * @param   string  $value The value of the header.
+     */
     function setHeader($key, $value = null)
     {
         if (empty($key) || (isset($value) && !is_scalar($value))) {
@@ -207,16 +207,16 @@ class HTTP_Header extends HTTP
     }
 
     /**
-    * Get Header
-    * 
-    * If $key is omitted, all stored headers will be returned.
-    * 
-    * @access   public
-    * @return   mixed   Returns string value of the requested header,
-    *                   array values of all headers or false if header $key
-    *                   is not set.
-    * @param    string  $key    The name of the header to fetch.
-    */
+     * Get Header
+     * 
+     * If $key is omitted, all stored headers will be returned.
+     * 
+     * @access  public
+     * @return  mixed   Returns string value of the requested header,
+     *                  array values of all headers or false if header $key
+     *                  is not set.
+     * @param   string  $key    The name of the header to fetch.
+     */
     function getHeader($key = null)
     {
         if (!isset($key)) {
@@ -233,18 +233,18 @@ class HTTP_Header extends HTTP
     }
 
     /**
-    * Send Headers
-    * 
-    * Send out the header that you set via setHeader().
-    * 
-    * @access   public
-    * @return   bool    Returns true on success or false if headers are already
-    *                   sent.
-    * @param    array   $keys Headers to (not) send, see $include.
-    * @param    array   $include If true only $keys matching headers will be
-    *                   sent, if false only header not matching $keys will be
-    *                   sent.
-    */
+     * Send Headers
+     * 
+     * Send out the header that you set via setHeader().
+     * 
+     * @access  public
+     * @return  bool    Returns true on success or false if headers are already
+     *                  sent.
+     * @param   array   $keys Headers to (not) send, see $include.
+     * @param   array   $include If true only $keys matching headers will be
+     *                  sent, if false only header not matching $keys will be
+     *                  sent.
+     */
     function sendHeaders($keys = array(), $include = true)
     {
         if (headers_sent()) {
@@ -267,19 +267,19 @@ class HTTP_Header extends HTTP
     }
 
     /**
-    * Send Satus Code
-    * 
-    * Send out the given HTTP-Status code. Use this for example when you 
-    * want to tell the client this page is cached, then you would call 
-    * sendStatusCode(304).
-    *
-    * @see HTTP_Header_Cache::exitIfCached()
-    * 
-    * @access   public
-    * @return   bool    Returns true on success or false if headers are already
-    *                   sent.
-    * @param    int     $code The status code to send, i.e. 404, 304, 200, etc.
-    */
+     * Send Satus Code
+     * 
+     * Send out the given HTTP-Status code. Use this for example when you 
+     * want to tell the client this page is cached, then you would call 
+     * sendStatusCode(304).
+     *
+     * @see HTTP_Header_Cache::exitIfCached()
+     * 
+     * @access  public
+     * @return  bool    Returns true on success or false if headers are already
+     *                  sent.
+     * @param   int     $code The status code to send, i.e. 404, 304, 200, etc.
+     */
     function sendStatusCode($code)
     {
         if (headers_sent()) {
@@ -295,20 +295,20 @@ class HTTP_Header extends HTTP
     }
 
     /**
-    * Date to Timestamp
-    * 
-    * Converts dates like
-    *       Mon, 31 Mar 2003 15:26:34 GMT
-    *       Tue, 15 Nov 1994 12:45:26 GMT
-    * into a timestamp, strtotime() didn't do it in older versions.
-    *
-    * @deprecated
-    * @access   public
-    * @return   mixed   Returns int unix timestamp or false if the date doesn't
-    *                   seem to be a valid GMT date.
-    * @param    string  $d The GMT date.
-    */
-    function dateToTimestamp($d)
+     * Date to Timestamp
+     * 
+     * Converts dates like
+     *      Mon, 31 Mar 2003 15:26:34 GMT
+     *      Tue, 15 Nov 1994 12:45:26 GMT
+     * into a timestamp, strtotime() didn't do it in older versions.
+     *
+     * @deprecated
+     * @access  public
+     * @return  mixed   Returns int unix timestamp or false if the date doesn't
+     *                  seem to be a valid GMT date.
+     * @param   string  $date The GMT date.
+     */
+    function dateToTimestamp($date)
     {
         static $monts = array(
             null => 0, 'Jan' => 1, 'Feb' => 2, 'Mar' => 3, 'Apr' => 4,
@@ -316,44 +316,45 @@ class HTTP_Header extends HTTP
             'Oct' => 10, 'Nov' => 11, 'Dec' => 12
         );
         
-        if (-1 < $timestamp = strToTime($d)) {
+        if (-1 < $timestamp = strToTime($date)) {
             return $timestamp;
         }
         
-        if (!preg_match('~[^,]*,\s(\d+)\s(\w+)\s(\d+)\s(\d+):(\d+):(\d+).*~', $d, $m)) {
+        if (!preg_match('~[^,]*,\s(\d+)\s(\w+)\s(\d+)\s(\d+):(\d+):(\d+).*~',
+            $date, $m)) {
             return false;
         }
         
         // [0] => Mon, 31 Mar 2003 15:42:55 GMT
         // [1] => 31 [2] => Mar [3] => 2003 [4] => 15 [5] => 42 [6] => 55
-        return mktime($d[4], $d[5], $d[6], $months[$d[2]], $d[1], $d[3]);
+        return mktime($m[4], $m[5], $m[6], $months[$m[2]], $m[1], $m[3]);
     }
 
     /**
-    * Redirect
-    * 
-    * This function redirects the client. This is done by issuing a Location 
-    * header and exiting.  Additionally to HTTP::redirect() you can also add 
-    * parameters to the url.
-    * 
-    * If you dont need parameters to be added, simply use HTTP::redirect()
-    * otherwise use HTTP_Header::redirect().
-    *
-    * @see      HTTP::redirect()
-    * @author   Wolfram Kriesing <wk@visionp.de>
-    * @access   public
-    * @return   void
-    * @param    string  $url The URL to redirect to, if none is given it 
-    *                   redirects to the current page.
-    * @param    mixed   $param Possible values:
-    *                       o null (default) - only the session-id will be 
-    *                         added, but only when trans_sid is enabled.
-    *                       o false - no parameters to add
-    *                       o true - add the session-id
-    *                       o array - of parameter names, if the key is a string
-    *                         it's assumed to be name => value, otherwise the 
-    *                         value is retreived using $GLOBALS['paraName'].
-    */
+     * Redirect
+     * 
+     * This function redirects the client. This is done by issuing a Location 
+     * header and exiting.  Additionally to HTTP::redirect() you can also add 
+     * parameters to the url.
+     * 
+     * If you dont need parameters to be added, simply use HTTP::redirect()
+     * otherwise use HTTP_Header::redirect().
+     *
+     * @see     HTTP::redirect()
+     * @author  Wolfram Kriesing <wk@visionp.de>
+     * @access  public
+     * @return  void
+     * @param   string  $url The URL to redirect to, if none is given it 
+     *                  redirects to the current page.
+     * @param   mixed   $param Possible values:
+     *                      o null (default) - only the session-id will be 
+     *                        added, but only when trans_sid is enabled.
+     *                      o false - no parameters to add
+     *                      o true - add the session-id
+     *                      o array - of parameter names, if the key is a string
+     *                        it's assumed to be name => value, otherwise the 
+     *                        value is retreived using $GLOBALS['paraName'].
+     */
     function redirect($url = null, $param = null)
     {
         if (!isset($url)) {
