@@ -17,7 +17,7 @@
  * @author      Wolfram Kriesing <wk@visionp.de>
  * @author      Davey Shafik <davey@php.net>
  * @author      Michael Wallner <mike@php.net>
- * @copyright   1997-2005 The PHP Group
+ * @copyright   2003-2005 The Authors
  * @license     http://www.php.net/license/3_0.txt  PHP License 3.0
  * @version     CVS: $Id$
  * @link        http://pear.php.net/package/HTTP_Header
