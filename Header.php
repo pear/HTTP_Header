@@ -373,8 +373,8 @@ class HTTP_Header extends HTTP
             }
         }
         
-        $purl = parse_url($url);
         if ($qstr = implode('&', $qs)) {
+            $purl = parse_url($url);
             $url .= (isset($purl['query']) ? '&' : '?') . $qstr;
         }
 
