@@ -287,7 +287,11 @@ class HTTP_Header extends HTTP
             $code = constant('HTTP_HEADER_STATUS_'. $code);
         }
         
-        header('HTTP/'. $this->_httpVersion .' '. $code);
+        if (strncasecmp(PHP_SAPI, 'cgi', 3)) {
+            header('HTTP/'. $this->_httpVersion .' '. $code);
+        } else {
+            header('Status: '. $code);
+        }
         return true;
     }
 
