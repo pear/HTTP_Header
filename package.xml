@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
-<!-- $Revision: 1.17 $ -->
+<!-- $Revision: 1.18 $ -->
 <package version="1.0">
  <name>HTTP_Header</name>
  <summary>
@@ -32,7 +32,7 @@ It also provides methods for checking Status types.
   </maintainer>
  </maintainers>
  <release>
-  <version>1.0.</version>
+  <version>1.0.0</version>
   <date>2004-07-??</date>
   <license>PHP License</license>
   <state>stable</state>
@@ -54,6 +54,15 @@ It also provides methods for checking Status types.
   </deps>
  </release>
  <changelog>
+		<release>
+			<version>1.0.0RC1</version>
+			<date>2004-07-02</date>
+			<license>PHP License</license>
+			<state>beta</state>
+			<notes>
+* First Release Candidate for stable release.
+			</notes>
+		</release>
 	 <release>
 	  <version>0.3.0</version>
 	  <date>2004-06-12</date>
