@@ -19,7 +19,7 @@
 
 require_once 'PEAR.php';
 require_once 'HTTP.php';
-                                     
+
 
 
 define( HTTP_HEADER_STATUS_304 , '304 Not modified' );
@@ -29,7 +29,7 @@ define( HTTP_HEADER_STATUS_304 , '304 Not modified' );
 /**
 *
 */
-class HTTP_Header extends PEAR
+class HTTP_Header extends HTTP
 {
                                                   
     /**
@@ -55,7 +55,7 @@ class HTTP_Header extends PEAR
     *   @param
     *   @param  mixed   if the value is not given the default value depends on the $key
     */
-    function setHeader( $key , $value=null )
+    function setHeader ( $key , $value=null )
     {
 //FIXXXME do sanity checks, i.e. if the headers are valid, etc.
 // may be check protocol too (HTTP 1.0/1.1)
@@ -75,7 +75,7 @@ class HTTP_Header extends PEAR
     *
     *
     */
-    function getHeader( $key=null )
+    function getHeader ( $key=null )
     {
         if( $key==null )
             return $this->_headers;
@@ -88,16 +88,20 @@ class HTTP_Header extends PEAR
     *   @param  array   the keys that shall be sent, if the array is empty all
     *                   the headers will be sent (all headers that you would get vie $this->getHeader())
     */
-    function sendHeaders( $keys=array() )
+    function sendHeaders ( $keys=array() )
     {
-        foreach( $this->_headers as $key=>$value ) {
+        foreach ( $this->_headers as $key=>$value ) {
             header( "$key: $value" );
         }
     }
-
-    function sendStatusCode( $code )
+                          
+    /**
+    *
+    *
+    */
+    function sendStatusCode ( $code )
     {
-        if( is_int($code) ) {
+        if ( is_int($code) ) {
             // if the $code is an int we get the constant here
             // is there an easier way to build a constant dynamically?
             eval("\$code = HTTP_HEADER_STATUS_".$code.';');
@@ -105,8 +109,30 @@ class HTTP_Header extends PEAR
 
         header( 'HTTP/'.$this->_httpVersion.' '.$code );
     }
+                                   
+    /**
+    *   converts dates like
+    *       January, 17-Fri-03 14:49:43 GMT
+    *   into a timestamp, strtotime doesnt do it :-(
+    */
+    function dateToTimestamp( $date )
+    {                                      
+        $months = array_flip(array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'));
 
-
+        preg_match( '~([^,]*),\s(\d+)-...-(\d+)\s(\d+):(\d+):(\d+).*~' , $date , $splitDate );
+        $splitDate[1] = substr($splitDate[1],0,3);
+        $timestamp = mktime( $splitDate[4] , $splitDate[5] , $splitDate[6] , $months[$splitDate[1]]+1 ,  $splitDate[2] ,  $splitDate[3] );
+        
+        return $timestamp;
+//        $dateTime = new I18N_DateTime('de');
+//print $dateTime->format($timestamp);
+/*
+        $dateTime = new I18N_DateTime('de');
+print $_SERVER['HTTP_IF_MODIFIED_SINCE'].'<br>';
+print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
+        print $dateTime->format(strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']));
+*/
+    }
 
 }
 ?>
