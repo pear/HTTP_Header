@@ -168,16 +168,25 @@ class HTTP_Header extends HTTP
                                    
     /**
     *   converts dates like
-    *       January, 17-Fri-03 14:49:43 GMT
+    *       Mon, 31 Mar 2003 15:26:34 GMT
+    *       Tue, 15 Nov 1994 12:45:26 GMT
     *   into a timestamp, strtotime doesnt do it :-(
     */
-    function dateToTimestamp( $date )
+    function dateToTimestamp($date)
     {                                      
         $months = array_flip(array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'));
 
-        preg_match( '~([^,]*),\s(\d+)-...-(\d+)\s(\d+):(\d+):(\d+).*~' , $date , $splitDate );
-        $splitDate[1] = substr($splitDate[1],0,3);
-        $timestamp = mktime( $splitDate[4] , $splitDate[5] , $splitDate[6] , $months[$splitDate[1]]+1 ,  $splitDate[2] ,  $splitDate[3] );
+// this was converted, i dont know why    January, 17-Fri-03 14:49:43 GMT   
+//        preg_match( '~([^,]*),\s(\d+)-...-(\d+)\s(\d+):(\d+):(\d+).*~' , $date , $splitDate );
+        
+        // this returns: 
+        // for  Mon, 31 Mar 2003 15:42:55 GMT
+        //  Array ( [0] => Mon, 31 Mar 2003 15:42:55 GMT 
+        //          [1] => 31 [2] => Mar [3] => 2003 [4] => 15 [5] => 42 [6] => 55 )
+        preg_match('~[^,]*,\s(\d+)\s(\w+)\s(\d+)\s(\d+):(\d+):(\d+).*~',$date,$splitDate);
+//        $splitDate[1] = substr($splitDate[1],0,3);
+        $timestamp = mktime($splitDate[4],$splitDate[5],$splitDate[6],
+                            $months[$splitDate[2]]+1,$splitDate[1],$splitDate[3]);
         
         return $timestamp;
 //        $dateTime = new I18N_DateTime('de');
