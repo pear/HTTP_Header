@@ -101,9 +101,10 @@ define('HTTP_HEADER_STATUS_SERVER_ERROR',5);
 /**
 * HTTP_Header
 * 
-* @package  HTTP_Header
-* @access   public
-* @version  $Revision$
+* @package      HTTP_Header
+* @category     HTTP
+* @access       public
+* @version      $Revision$
 */
 class HTTP_Header extends HTTP
 {
