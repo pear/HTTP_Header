@@ -202,6 +202,7 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
     *   @see    HTTP::redirect()
     *   @author Wolfram Kriesing  <wk@visionp.de>
     *   @param  string $url URL where the redirect should go to
+    *                       if none is given it redirects to the current page
     *   @param  mixed   (1) true (default) - only the session-id will be added, this is very useful
     *                       when using trans_sid<br>
     *                   (2) false - no paras to add<br>
@@ -209,8 +210,12 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
     *                       to be name=>value, otherwise the value is retreived using
     *                       $GLOBALS['paraName']
     */
-    function redirect($url,$param=true)
+    function redirect($url=null,$param=true)
     {
+        if ($url===null) {
+            $url = $_SERVER['PHP_SELF'];
+        }
+
         // true means add the session id only
         if ($param === true) {
             $param = array( session_name() => session_id() );
