@@ -116,18 +116,18 @@ class HTTP_Header extends HTTP
     *   @param
     *   @param  mixed   if the value is not given the default value depends on the $key
     */
-    function setHeader ( $key , $value=null )
+    function setHeader($key, $value=null)
     {
 //FIXXXME do sanity checks, i.e. if the headers are valid, etc.
 // may be check protocol too (HTTP 1.0/1.1)
 
         // is the 'last-modified' value a timestamp? if the value is an int then we assume so, or if it is not given
-        if( strtolower($key) == 'last-modified' && ( $value == null || (int)$value==$value  )   ) {
-            if( $value == null )
+        if(strtolower($key)=='last-modified' && ($value==null || (int)$value==$value)) {
+            if ($value == null) {
                 $value = time();
+            }
             $this->_headers[$key] = HTTP::Date($value);//date('D, d M Y H:i:s T',$value);
-        }
-        else {
+        } else {
             $this->_headers[$key] = $value;
         }
     }
@@ -136,11 +136,11 @@ class HTTP_Header extends HTTP
     *
     *
     */
-    function getHeader ( $key=null )
+    function getHeader ($key=null)
     {
-        if( $key==null )
+        if ($key==null) {
             return $this->_headers;
-
+        }
         return $this->_headers[$key];
     }
 
@@ -149,10 +149,10 @@ class HTTP_Header extends HTTP
     *   @param  array   the keys that shall be sent, if the array is empty all
     *                   the headers will be sent (all headers that you would get vie $this->getHeader())
     */
-    function sendHeaders( $keys=array())
+    function sendHeaders($keys=array())
     {
-        foreach ( $this->_headers as $key=>$value ) {
-            header( "$key: $value" );
+        foreach ($this->_headers as $key=>$value) {
+            header("$key: $value");
         }
     }
 
@@ -260,7 +260,7 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
      * @return int|false
      */
 
-    function statusType($http_code) 
+    function getStatusType($http_code) 
     {
         if(defined('HTTP_HEADER_STATUS_' .$http_code)) {
             $type = substr($http_code,0,1);
@@ -287,7 +287,7 @@ print strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']).'<br>';
      * @return string|false
      */
 
-    function statusText($http_code) 
+    function getStatusText($http_code) 
     {
         if ($this->statusType($http_code)) {
             return constant('HTTP_HEADER_STATUS_' .$http_code);
