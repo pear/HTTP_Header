@@ -80,7 +80,7 @@ class HTTP_Header_Cache extends HTTP_Header
      */
     function getCacheStart()
     {
-        if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+        if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && !$this->isPost()) {
             return strtotime(array_shift(explode(';', 
                 $_SERVER['HTTP_IF_MODIFIED_SINCE'])));
         }
@@ -119,7 +119,7 @@ class HTTP_Header_Cache extends HTTP_Header
      */
     function isOlderThan($time = 0, $unit = 'seconds')
     {
-        if (!isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+        if (!isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) || $this->isPost()) {
             return true;
         }
         if (!$time) {
@@ -162,6 +162,9 @@ class HTTP_Header_Cache extends HTTP_Header
      */
     function isCached($lastModified = 0)
     {
+        if ($this->isPost()) {
+            return false;
+        }
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && !$lastModified) {
             return true;
         }
@@ -169,6 +172,20 @@ class HTTP_Header_Cache extends HTTP_Header
             return false;
         }
         return !$this->isOlderThan($seconds);
+    }
+    
+    /**
+     * Is Post
+     * 
+     * Check if request method is "POST".
+     * 
+     * @access  public
+     * @return  bool
+     */
+    function isPost()
+    {
+        return  isset($_SERVER['REQUEST_METHOD']) and
+            'POST' == $_SERVER['REQUEST_METHOD'];
     }
     
     /**
