@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.1">
-<!-- $Revision: 1.31 $ -->
+<!-- $Revision: 1.32 $ -->
 <package version="1.0">
  <name>HTTP_Header</name>
  <summary>
@@ -32,13 +32,13 @@ It also provides methods for checking Status types.
   </maintainer>
  </maintainers>
  <release>
-  <version>1.1.2RC1</version>
+  <version>1.1.2</version>
   <date>2004-12-22</date>
   <license>PHP License</license>
-  <state>beta</state>
+  <state>stable</state>
   <notes>
 <![CDATA[
-* use "Status:" instead of HTTP/1.1 for sending status codes with CGI-SAPI
+* Fixed Bug #4338 - Typos in HTTP status messages
 ]]>
   </notes>
   <filelist>
