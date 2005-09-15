@@ -192,7 +192,7 @@ class HTTP_Header extends HTTP
      * @return  bool    Returns true on success or false if $key was empty or
      *                  $value was not of an scalar type.
      * @param   string  $key The name of the header.
-     * @param   string  $value The value of the header.
+     * @param   string  $value The value of the header. (NULL to unset header)
      */
     function setHeader($key, $value = null)
     {
@@ -201,7 +201,6 @@ class HTTP_Header extends HTTP
         }
         
         $key = strToLower($key);
-        
         if ($key == 'last-modified') {
             if (!isset($value)) {
                 $value = HTTP::Date(time());
@@ -210,7 +209,12 @@ class HTTP_Header extends HTTP
             }
         }
         
-        $this->_headers[$key] = $value;
+        if (isset($value)) {
+            $this->_headers[$key] = $value;
+        } else {
+            unset($this->_headers[$key]);
+        }
+        
         return true;
     }
 
