@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.1">
-<!-- $Revision: 1.34 $ -->
+<!-- $Revision: 1.35 $ -->
 <package version="1.0">
  <name>HTTP_Header</name>
  <summary>
@@ -32,13 +32,14 @@ It also provides methods for checking Status types.
   </maintainer>
  </maintainers>
  <release>
-  <version>1.1.3</version>
+  <version>1.2.0</version>
   <date>2005-09-00</date>
-  <license>PHP License</license>
-  <state>stable</state>
+  <license>BSD, revised</license>
+  <state>beta</state>
   <notes>
 <![CDATA[
-* Fixed Bug #5404 - Headers cannot be unset
+* Fixed Bug #5830 - only variables can be passed by reference
+* Changed license to BSD
 ]]>
   </notes>
   <filelist>
@@ -48,6 +49,7 @@ It also provides methods for checking Status types.
      <file role="php">Cache.php</file>
     </dir>
    </dir>
+   <file role="doc">LICENSE</file>
    <file role="test" install-as="response.php">tests/response.php</file>
    <file role="test" install-as="cacheresponse.php">tests/cacheresponse.php</file>
    <file role="test" install-as="header.php">tests/header.php</file>

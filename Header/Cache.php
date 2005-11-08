@@ -6,18 +6,12 @@
  * 
  * PHP versions 4 and 5
  *
- * LICENSE: This source file is subject to version 3.0 of the PHP license
- * that is available through the world-wide-web at the following URI:
- * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
- * the PHP License and are unable to obtain it through the web, please
- * send a note to license@php.net so we can mail you a copy immediately.
- *
  * @category    HTTP
  * @package     HTTP_Header
  * @author      Wolfram Kriesing <wk@visionp.de>
  * @author      Michael Wallner <mike@php.net>
  * @copyright   2003-2005 The Authors
- * @license     http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @license     BSD, revised
  * @version     CVS: $Id$
  * @link        http://pear.php.net/package/HTTP_Header
  */
@@ -49,7 +43,6 @@ require_once 'HTTP/Header.php';
  * 
  * @package     HTTP_Header
  * @category    HTTP
- * @license     PHP License
  * @access      public
  * @version     $Revision$
  */
@@ -92,7 +85,7 @@ class HTTP_Header_Cache extends HTTP_Header
     function getCacheStart()
     {
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && !$this->isPost()) {
-            return strtotime(array_shift(explode(';', 
+            return strtotime(current($array = explode(';', 
                 $_SERVER['HTTP_IF_MODIFIED_SINCE'])));
         }
         return time();
