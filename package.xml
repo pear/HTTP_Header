@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.1">
-<!-- $Revision: 1.36 $ -->
+<!-- $Revision: 1.37 $ -->
 <package version="1.0">
  <name>HTTP_Header</name>
  <summary>
@@ -32,14 +32,13 @@ It also provides methods for checking Status types.
   </maintainer>
  </maintainers>
  <release>
-  <version>1.2.0</version>
-  <date>2005-01-00</date>
+  <version>1.2.1</version>
+  <date>2006-04-00</date>
   <license>BSD, revised</license>
   <state>stable</state>
   <notes>
 <![CDATA[
-* Fixed Bug #5830 - only variables can be passed by reference
-* Changed license to BSD
+* Implemented FR #5914 - add possibility to prettify header names
 ]]>
   </notes>
   <filelist>
@@ -63,6 +62,18 @@ It also provides methods for checking Status types.
   </deps>
  </release>
  <changelog>
+  <release>
+   <version>1.2.0</version>
+   <date>2005-11-14</date>
+   <license>BSD, revised</license>
+   <state>stable</state>
+   <notes>
+<![CDATA[
+* Fixed Bug #5830 - only variables can be passed by reference
+* Changed license to BSD
+]]>
+   </notes>
+  </release>
   <release>
    <version>1.1.2</version>
    <date>2005-07-18</date>

@@ -132,6 +132,12 @@ class HTTP_Header extends HTTP
     var $_httpVersion = '1.0';
 
     /**
+     * @var     bool
+     * @access  public
+     */
+    var $prettify = false;
+    
+    /**
      * Constructor
      *
      * Sets HTTP version.
@@ -260,12 +266,12 @@ class HTTP_Header extends HTTP
             array_change_key_case($keys, CASE_LOWER);
             foreach ($this->_headers as $key => $value) {
                 if ($include ? in_array($key, $keys) : !in_array($key, $keys)) {
-                    header($key .': '. $value);
+                    header(($this->prettify ? uctitle($key) : $key) .': '. $value);
                 }
             }
         } else {
             foreach ($this->_headers as $header => $value) {
-                header($header .': '. $value);
+                header(($this->prettify ? uctitle($header) : $header) .': '. $value);
             }
         }
         return true;
