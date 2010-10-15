@@ -1,173 +1,214 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.1">
-<!-- $Revision: 1.37 $ -->
-<package version="1.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>HTTP_Header</name>
- <summary>
-OO interface to modify and handle HTTP headers and status codes.
- </summary>          
- <description>
-This class provides methods to set/modify HTTP headers 
+ <channel>pear.php.net</channel>
+ <summary>OO interface to modify and handle HTTP headers and status codes.</summary>
+ <description>This class provides methods to set/modify HTTP headers 
 and status codes including an HTTP caching facility.
-It also provides methods for checking Status types.
- </description>
- <maintainers>
-  <maintainer>
-   <user>cain</user>
-   <name>Wolfram Kriesing</name>
-   <email>wolfram@kriesing.de</email>
-   <role>lead</role>
-  </maintainer>
-  <maintainer>
-   <user>davey</user>
-   <name>Davey Shafik</name>
-   <email>davey@php.net</email>
-   <role>lead</role>
-  </maintainer>
-  <maintainer>
-   <user>mike</user>
-   <name>Michael Wallner</name>
-   <email>mike@php.net</email>
-   <role>lead</role>
-  </maintainer>
- </maintainers>
- <release>
-  <version>1.2.1</version>
-  <date>2006-04-00</date>
-  <license>BSD, revised</license>
-  <state>stable</state>
-  <notes>
-<![CDATA[
-* Implemented FR #5914 - add possibility to prettify header names
-]]>
-  </notes>
+It also provides methods for checking Status types.</description>
+ <lead>
+  <name>Wolfram Kriesing</name>
+  <user>cain</user>
+  <email>wolfram@kriesing.de</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Davey Shafik</name>
+  <user>davey</user>
+  <email>davey@php.net</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Michael Wallner</name>
+  <user>mike</user>
+  <email>mike@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-10-15</date>
+ <time>23:47:45</time>
+ <version>
+  <release>1.2.1</release>
+  <api>1.2.1</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license>BSD, revised</license>
+ <notes>
+QA release
+ Implemented FR #5914 - add possibility to prettify header names]
+Bug #5830
+Fatal error: Only variables can be passed by reference in /usr/local/share/php/
+Bug #5404 Headers cannot be unset
+Package 2.0
+SVN layout
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="6dbcbf28d22231cb86f2dceb1e007bd0" name="HTTP/Header.php" role="php" />
+   <file baseinstalldir="/" md5sum="0f9c29496cb05d8425c108ec174c95e4" name="HTTP/Header/Cache.php" role="php" />
+   <file baseinstalldir="/" md5sum="294999a5c46136b0e7a4e2bf0f43779b" name="tests/cacheresponse.php" role="test" />
+   <file baseinstalldir="/" md5sum="11d23b89d4b38c2539781e2d5790c5d3" name="tests/header.php" role="test" />
+   <file baseinstalldir="/" md5sum="387d18c59247c881cb96ec3da21c12db" name="tests/header_cache.php" role="test" />
+   <file baseinstalldir="/" md5sum="49015ab30ea0c35ebc39b4c4a2807546" name="tests/README.txt" role="test" />
+   <file baseinstalldir="/" md5sum="1e9be453ad96394789355d497e530653" name="tests/response.php" role="test" />
+   <file baseinstalldir="/" md5sum="b4641eee2eca1a10d4562345a782b4ba" name="LICENSE" role="doc" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+   <package>
+    <name>HTTP</name>
+    <channel>pear.php.net</channel>
+    <min>1.3.1</min>
+   </package>
+   <package>
+    <name>PEAR</name>
+    <channel>pear.php.net</channel>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease>
   <filelist>
-   <dir name="/" baseinstalldir="HTTP">
-    <file role="php">Header.php</file>
-    <dir name="Header">
-     <file role="php">Cache.php</file>
-    </dir>
-   </dir>
-   <file role="doc">LICENSE</file>
-   <file role="test" install-as="response.php">tests/response.php</file>
-   <file role="test" install-as="cacheresponse.php">tests/cacheresponse.php</file>
-   <file role="test" install-as="header.php">tests/header.php</file>
-   <file role="test" install-as="header_cache.php">tests/header_cache.php</file>
-   <file role="test" install-as="README.txt">tests/README.txt</file>
+   <install as="response.php" name="tests/response.php" />
+   <install as="cacheresponse.php" name="tests/cacheresponse.php" />
+   <install as="header.php" name="tests/header.php" />
+   <install as="header_cache.php" name="tests/header_cache.php" />
+   <install as="README.txt" name="tests/README.txt" />
   </filelist>
-  <deps>
-   <dep type="pkg" rel="ge" version="1.3.1">HTTP</dep>
-   <dep type="pkg" rel="has">PEAR</dep>
-   <dep type="php" rel="ge" version="4.2.0"/>
-  </deps>
- </release>
+ </phprelease>
  <changelog>
   <release>
-   <version>1.2.0</version>
-   <date>2005-11-14</date>
-   <license>BSD, revised</license>
-   <state>stable</state>
+   <version>
+    <release>0.1</release>
+    <api>0.1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2003-01-17</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-<![CDATA[
-* Fixed Bug #5830 - only variables can be passed by reference
-* Changed license to BSD
-]]>
+- initial release in PEAR
    </notes>
   </release>
   <release>
-   <version>1.1.2</version>
-   <date>2005-07-18</date>
-   <license>PHP License</license>
-   <state>stable</state>
+   <version>
+    <release>0.1.1</release>
+    <api>0.1.1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2003-01-27</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-<![CDATA[
-* Fixed Bug #4338 - Typos in HTTP status messages
-]]>
+- added redirect, which takes care of additional GET vars too
+- added all HTTP1.1 code (thanks to Patrick O&apos;Lone)
    </notes>
   </release>
   <release>
-   <version>1.1.1</version>
-   <date>2004-11-10</date>
-   <license>PHP License</license>
-   <state>stable</state>
+   <version>
+    <release>0.1.2</release>
+    <api>0.1.2</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2003-03-10</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-<![CDATA[
-* POST requests should *NOT* be cached
-]]>
+* if redirect has no params given, redirect to PHP_SELF
+* Cache::exitIfCached() returns false if isCached() is false
    </notes>
   </release>
   <release>
-   <version>1.1.0</version>
-   <date>2004-08-05</date>
-   <license>PHP License</license>
-   <state>stable</state>
+   <version>
+    <release>0.1.3</release>
+    <api>0.1.3</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2003-03-31</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-<![CDATA[
-+ Support for Internet Explorer
-]]>
+* fixed dateToTimestamp() to retrieve proper cache date
    </notes>
   </release>
   <release>
-   <version>1.0.2</version>
-   <date>2004-08-05</date>
-   <license>PHP License</license>
-   <state>stable</state>
+   <version>
+    <release>0.1.4</release>
+    <api>0.1.4</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2003-09-19</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-<![CDATA[
-* Fixed Bug #2063
-]]>
+* redirect sends session id by default when trans_sid=1, behaviour has changed!
    </notes>
   </release>
   <release>
-   <version>1.0.1</version>
-   <date>2004-08-04</date>
-   <license>PHP License</license>
-   <state>stable</state>
+   <version>
+    <release>0.1.5</release>
+    <api>0.1.5</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2003-12-09</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-<![CDATA[
-* Don't append a question mark to redirection urls which have no query string
-* Fixed Header_Cache::isOlderThan() and Header_Cache::isCached() (finally)
-]]>
+* fix in redirect(), when parameter was added, it was always added with ?para=value, 
+instead of checking if there was already a param
+* added quite some methods by Davey Shafik
+* changed HTTP_HEADER_STATUS_* content by Davey Shafik
+* added getStatusType() and getStatusText() by Davey Shafik
    </notes>
   </release>
   <release>
-   <version>1.0.0</version>
-   <date>2004-07-21</date>
-   <license>PHP License</license>
-   <state>stable</state>
+   <version>
+    <release>0.1.6</release>
+    <api>0.1.6</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2003-12-28</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-<![CDATA[
-* Call parent constructor in HTTP_Header_Cache
-* Fixed Bug in HTTP_Header_Cache::isCached()
-* Fixed Bug #1908 (added optional parameter $session to redirect())
-+ Added PHPUnit test cases
-]]>
+* Fixed Errors in sendStatusCode
+* Fixed all HTTP_Header::isError (and similar) methods
+* Fixed HTTP_Header::sendStatusCode
    </notes>
   </release>
   <release>
-   <version>1.0.0RC1</version>
-   <date>2004-07-02</date>
-   <license>PHP License</license>
-   <state>beta</state>
-   <notes>
-* First Release Candidate for stable release.
-   </notes>
-  </release>
-  <release>
-   <version>0.3.0</version>
-   <date>2004-06-12</date>
-   <license>PHP License</license>
-   <state>beta</state>
-   <notes>
-* refactored HTTP_Header_Cache
-* fixed typos in HTTP_Header::dateToTimestamp()
-   </notes>
-  </release>
-  <release>
-   <version>0.2.0</version>
+   <version>
+    <release>0.2.0</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
    <date>2004-06-09</date>
-   <license>PHP License</license>
-   <state>beta</state>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
 * honor actual HTTP version
 * added accessors to HTTP version
@@ -176,75 +217,166 @@ It also provides methods for checking Status types.
 * general code clean up
    </notes>
   </release>
-  <release> 
-   <version>0.1.6</version>
-   <date>2003-12-28</date>
-   <license>PHP License</license>
-   <state>beta</state>
+  <release>
+   <version>
+    <release>0.3.0</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2004-06-12</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-    * Fixed Errors in sendStatusCode
-    * Fixed all HTTP_Header::isError (and similar) methods
-    * Fixed HTTP_Header::sendStatusCode
-   </notes>
-  </release>
-  <release> 
-   <version>0.1.5</version>
-   <date>2003-12-09</date>
-   <license>PHP License</license>
-   <state>beta</state>
-   <notes>
-    * fix in redirect(), when parameter was added, it was always added with ?para=value, 
-    instead of checking if there was already a param
-    * added quite some methods by Davey Shafik
-    * changed HTTP_HEADER_STATUS_* content by Davey Shafik
-    * added getStatusType() and getStatusText() by Davey Shafik
+* refactored HTTP_Header_Cache
+* fixed typos in HTTP_Header::dateToTimestamp()
    </notes>
   </release>
   <release>
-   <version>0.1.4</version>
-   <date>2003-09-19</date>
-   <license>PHP License</license>
-   <state>beta</state>
+   <version>
+    <release>1.0.0RC1</release>
+    <api>1.0.0RC1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2004-07-02</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-    * redirect sends session id by default when trans_sid=1, behaviour has changed!
-   </notes>
-  </release>  
-  <release>
-   <version>0.1.3</version>
-   <date>2003-03-31</date>
-   <license>PHP License</license>
-   <state>beta</state>
-   <notes>
-    * fixed dateToTimestamp() to retrieve proper cache date
+* First Release Candidate for stable release.
    </notes>
   </release>
   <release>
-   <version>0.1.2</version>
-   <date>2003-03-10</date>
-   <license>PHP License</license>
-   <state>beta</state>
+   <version>
+    <release>1.0.0</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-07-21</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-    * if redirect has no params given, redirect to PHP_SELF
-    * Cache::exitIfCached() returns false if isCached() is false
+* Call parent constructor in HTTP_Header_Cache
+* Fixed Bug in HTTP_Header_Cache::isCached()
+* Fixed Bug #1908 (added optional parameter $session to redirect())
++ Added PHPUnit test cases
    </notes>
   </release>
   <release>
-   <version>0.1.1</version>
-   <date>2003-01-27</date>
-   <license>PHP License</license>
-   <state>alpha</state>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-08-04</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-    - added redirect, which takes care of additional GET vars too
-    - added all HTTP1.1 code (thanks to Patrick O'Lone)
+* Don&apos;t append a question mark to redirection urls which have no query string
+* Fixed Header_Cache::isOlderThan() and Header_Cache::isCached() (finally)
    </notes>
   </release>
   <release>
-   <version>0.1</version>
-   <date>2003-01-17</date>
-   <license>PHP License</license>
-   <state>alpha</state>
+   <version>
+    <release>1.0.2</release>
+    <api>1.0.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-08-05</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>
-    - initial release in PEAR
+* Fixed Bug #2063
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.0</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-08-05</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
++ Support for Internet Explorer
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.1</release>
+    <api>1.1.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-11-10</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+* POST requests should *NOT* be cached
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.2</release>
+    <api>1.1.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-07-18</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>
+* Fixed Bug #4338 - Typos in HTTP status messages
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0</release>
+    <api>1.2.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-11-14</date>
+   <license uri="http://www.example.com">BSD, revised</license>
+   <notes>
+* Fixed Bug #5830 - only variables can be passed by reference
+* Changed license to BSD
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.1</release>
+    <api>1.2.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-10-15</date>
+   <license>BSD, revised</license>
+   <notes>
+QA release
+ Implemented FR #5914 - add possibility to prettify header names]
+Bug #5830
+Fatal error: Only variables can be passed by reference in /usr/local/share/php/
+Bug #5404 Headers cannot be unset
+Package 2.0
+SVN layout
    </notes>
   </release>
  </changelog>
