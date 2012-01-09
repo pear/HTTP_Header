@@ -5,23 +5,14 @@
  * $Id$
  */
 
-require_once 'PHPUnit.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'HTTP/Header.php';
 
-class HTTP_HeaderTest extends PHPUnit_TestCase
+class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
 {
-    function HTTP_HeaderTest($name)
-    {
-        $this->PHPUnit_TestCase($name);
-    } 
-
     function setUp()
     {
         $this->testScript = 'http://local/www/mike/pear/HTTP_Header/tests/response.php';
-    } 
-
-    function tearDown()
-    {
     } 
 
     function testHTTP_Header()

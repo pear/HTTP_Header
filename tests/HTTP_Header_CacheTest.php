@@ -5,23 +5,14 @@
  * Id$
  */
 
-require_once 'PHPUnit.php';
+require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'HTTP/Header/Cache.php';
 
-class HTTP_Header_CacheTest extends PHPUnit_TestCase
+class HTTP_Header_CacheTest extends PHPUnit_Framework_TestCase
 {
-    function HTTP_Header_CacheTest($name)
-    {
-        $this->PHPUnit_TestCase($name);
-    } 
-
     function setUp()
     {
         $this->testScript = 'http://local/www/mike/pear/HTTP_Header/tests/cacheresponse.php';
-    } 
-
-    function tearDown()
-    {
     } 
 
     function testHTTP_Header_Cache()
