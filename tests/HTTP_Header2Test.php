@@ -122,11 +122,11 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
     function testgetStatusType()
     {
         $h = &new HTTP_Header2;
-        $this->assertEquals(HTTP_HEADER_STATUS_INFORMATIONAL, $h->getStatusType(101));
-        $this->assertEquals(HTTP_HEADER_STATUS_SUCCESSFUL, $h->getStatusType(206));
-        $this->assertEquals(HTTP_HEADER_STATUS_REDIRECT, $h->getStatusType(301));
-        $this->assertEquals(HTTP_HEADER_STATUS_CLIENT_ERROR, $h->getStatusType(404));
-        $this->assertEquals(HTTP_HEADER_STATUS_SERVER_ERROR, $h->getStatusType(500));
+        $this->assertEquals(HTTP_HEADER2_STATUS_INFORMATIONAL, $h->getStatusType(101));
+        $this->assertEquals(HTTP_HEADER2_STATUS_SUCCESSFUL, $h->getStatusType(206));
+        $this->assertEquals(HTTP_HEADER2_STATUS_REDIRECT, $h->getStatusType(301));
+        $this->assertEquals(HTTP_HEADER2_STATUS_CLIENT_ERROR, $h->getStatusType(404));
+        $this->assertEquals(HTTP_HEADER2_STATUS_SERVER_ERROR, $h->getStatusType(500));
         $this->assertFalse($h->getStatusType(8));
         unset($h);
     }
@@ -134,15 +134,15 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
     function testgetStatusText()
     {
         $h = &new HTTP_Header2;
-        $this->assertEquals(HTTP_HEADER_STATUS_100, '100 '. $h->getStatusText(100));
-        $this->assertEquals(HTTP_HEADER_STATUS_200, '200 '. $h->getStatusText(200));
-        $this->assertEquals(HTTP_HEADER_STATUS_300, '300 '. $h->getStatusText(300));
-        $this->assertEquals(HTTP_HEADER_STATUS_302, '302 '. $h->getStatusText(302));
-        $this->assertEquals(HTTP_HEADER_STATUS_401, '401 '. $h->getStatusText(401));
-        $this->assertEquals(HTTP_HEADER_STATUS_400, '400 '. $h->getStatusText(400));
-        $this->assertEquals(HTTP_HEADER_STATUS_500, '500 '. $h->getStatusText(500));
-        $this->assertEquals(HTTP_HEADER_STATUS_102, '102 '. $h->getStatusText(102));
-        $this->assertEquals(HTTP_HEADER_STATUS_404, '404 '. $h->getStatusText(404));
+        $this->assertEquals(HTTP_HEADER2_STATUS_100, '100 '. $h->getStatusText(100));
+        $this->assertEquals(HTTP_HEADER2_STATUS_200, '200 '. $h->getStatusText(200));
+        $this->assertEquals(HTTP_HEADER2_STATUS_300, '300 '. $h->getStatusText(300));
+        $this->assertEquals(HTTP_HEADER2_STATUS_302, '302 '. $h->getStatusText(302));
+        $this->assertEquals(HTTP_HEADER2_STATUS_401, '401 '. $h->getStatusText(401));
+        $this->assertEquals(HTTP_HEADER2_STATUS_400, '400 '. $h->getStatusText(400));
+        $this->assertEquals(HTTP_HEADER2_STATUS_500, '500 '. $h->getStatusText(500));
+        $this->assertEquals(HTTP_HEADER2_STATUS_102, '102 '. $h->getStatusText(102));
+        $this->assertEquals(HTTP_HEADER2_STATUS_404, '404 '. $h->getStatusText(404));
         $this->assertFalse($h->getStatusText(0));
         $this->assertFalse($h->getStatusText(800));
         unset($h);
