@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
- <name>HTTP_Header</name>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>HTTP_Header2</name>
  <channel>pear.php.net</channel>
  <summary>OO interface to modify and handle HTTP headers and status codes.</summary>
  <description>This class provides methods to set/modify HTTP headers 
@@ -24,8 +24,8 @@ It also provides methods for checking Status types.</description>
   <email>mike@php.net</email>
   <active>yes</active>
  </lead>
- <date>2010-10-15</date>
- <time>23:47:45</time>
+ <date>2012-01-12</date>
+ <time>08:33:10</time>
  <version>
   <release>1.2.1</release>
   <api>1.2.1</api>
@@ -46,14 +46,15 @@ SVN layout
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="6dbcbf28d22231cb86f2dceb1e007bd0" name="HTTP/Header.php" role="php" />
-   <file baseinstalldir="/" md5sum="0f9c29496cb05d8425c108ec174c95e4" name="HTTP/Header/Cache.php" role="php" />
-   <file baseinstalldir="/" md5sum="294999a5c46136b0e7a4e2bf0f43779b" name="tests/cacheresponse.php" role="test" />
-   <file baseinstalldir="/" md5sum="11d23b89d4b38c2539781e2d5790c5d3" name="tests/header.php" role="test" />
-   <file baseinstalldir="/" md5sum="387d18c59247c881cb96ec3da21c12db" name="tests/header_cache.php" role="test" />
-   <file baseinstalldir="/" md5sum="49015ab30ea0c35ebc39b4c4a2807546" name="tests/README.txt" role="test" />
-   <file baseinstalldir="/" md5sum="1e9be453ad96394789355d497e530653" name="tests/response.php" role="test" />
+   <file baseinstalldir="/" md5sum="f84decd7c48c738386540ce95af694d6" name="/HTTP/Header2.php" role="php" />
+   <file baseinstalldir="/" md5sum="72dd17c7a671932979f11b3444258c92" name="/HTTP/Header2/Cache.php" role="php" />
+   <file baseinstalldir="/" md5sum="509eaea5377309cd3214a971680f09c2" name="/tests/cacheresponse.php" role="php" />
+   <file baseinstalldir="/" md5sum="3ef6b01d0fdda7e8bdaad96a76fcda37" name="/tests/HTTP_Header2Test.php" role="php" />
+   <file baseinstalldir="/" md5sum="92e9c4d1f5441f95e2136612e4a0bfab" name="/tests/HTTP_Header2_CacheTest.php" role="php" />
+   <file baseinstalldir="/" md5sum="8ae54da06d5cfa08332695cd7a0f617f" name="/tests/README.txt" role="data" />
+   <file baseinstalldir="/" md5sum="700b69ad3b92b4de64eb9eb7cb77b6c2" name="/tests/response.php" role="php" />
    <file baseinstalldir="/" md5sum="b4641eee2eca1a10d4562345a782b4ba" name="LICENSE" role="doc" />
+   <file baseinstalldir="/" md5sum="4ee71b5e08a7dcb7d983224b77e04764" name="README" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -75,15 +76,7 @@ SVN layout
    </package>
   </required>
  </dependencies>
- <phprelease>
-  <filelist>
-   <install as="response.php" name="tests/response.php" />
-   <install as="cacheresponse.php" name="tests/cacheresponse.php" />
-   <install as="header.php" name="tests/header.php" />
-   <install as="header_cache.php" name="tests/header_cache.php" />
-   <install as="README.txt" name="tests/README.txt" />
-  </filelist>
- </phprelease>
+ <phprelease />
  <changelog>
   <release>
    <version>
@@ -367,7 +360,7 @@ instead of checking if there was already a param
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2010-10-15</date>
+   <date>2012-01-12</date>
    <license>BSD, revised</license>
    <notes>
 QA release
