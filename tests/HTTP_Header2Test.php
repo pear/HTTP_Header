@@ -79,9 +79,11 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testsendHeaders()
     {
-        $r = new HTTP_Request2($this->testScript);
+        $url = new Net_URL2($this->testScript);
+        $url->setQueryVariable('X-Foo', 'blablubb');
+
+        $r = new HTTP_Request2($url);
         $r->setMethod(HTTP_Request2::METHOD_GET);
-        $r->addQueryString('X-Foo', 'blablubb');
         $response = $r->send();
         $this->assertEquals('blablubb', $response->getHeader('x-foo'));
         unset($h, $r);
