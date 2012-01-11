@@ -89,11 +89,15 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testsendStatusCode()
     {
-        $r = new HTTP_Request2($this->testScript);
+        $url = new Net_URL2($this->testScript);
+        $r = new HTTP_Request2($url);
+
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $response = $r->send();
         $this->assertEquals(200, $response->getStatus(), 'test for response code 200');
-        $r->addQueryString('status', 500);
+
+        $url->setQueryVariable('status', '500');
+
         $response = $r->send();
         $this->assertEquals(500, $response->getStatus(), 'test for response code 500');
         unset($h, $r);
@@ -108,9 +112,10 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testredirect()
     {
-        $r = new HTTP_Request2($this->testScript, array('allowRedirects' => false));
+        $url = new Net_URL2($this->testScript);
+        $url->setQueryVariable('redirect', 'response.php?abc=123');
+        $r = new HTTP_Request2($url, array('allowRedirects' => false));
         $r->setMethod(HTTP_Request2::METHOD_GET);
-        $r->addQueryString('redirect', 'response.php?abc=123');
         $response = $r->send();
         $this->assertEquals(302, $response->getStatus(), 'test for response code 302');
         $this->assertTrue(strstr($response->getHeader('location'), 'response.php'));
