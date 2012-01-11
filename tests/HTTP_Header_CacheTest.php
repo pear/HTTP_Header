@@ -1,7 +1,7 @@
 <?php
 /**
  * Test Case for HTTP_Header_Cache
- * 
+ *
  * Id$
  */
 
@@ -13,12 +13,12 @@ class HTTP_Header_CacheTest extends PHPUnit_Framework_TestCase
     function setUp()
     {
         $this->testScript = 'http://local/www/mike/pear/HTTP_Header/tests/cacheresponse.php';
-    } 
+    }
 
     function testHTTP_Header_Cache()
     {
         $this->assertTrue(is_a(new HTTP_Header_Cache, 'HTTP_Header_Cache'));
-    } 
+    }
 
     function testgetCacheStart()
     {
@@ -27,7 +27,7 @@ class HTTP_Header_CacheTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(strtotime('yesterday'));
         $this->assertEquals($_SERVER['HTTP_IF_MODIFIED_SINCE'], HTTP::Date($c->getCacheStart()));
         unset($c, $_SERVER['HTTP_IF_MODIFIED_SINCE']);
-    } 
+    }
 
     function testisOlderThan()
     {
@@ -37,7 +37,7 @@ class HTTP_Header_CacheTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(time() - 3);
         $this->assertTrue($c->isOlderThan(1, 'second'));
         unset($c, $_SERVER['HTTP_IF_MODIFIED_SINCE']);
-    } 
+    }
 
     function testisCached()
     {
@@ -48,7 +48,7 @@ class HTTP_Header_CacheTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($c->isCached(time()), 'last modified header (yesterday) and param (now)');
         $this->assertTrue($c->isCached(strtotime('last year')), 'last modified header (yesterday) and param (last year)');
         unset($c, $_SERVER['HTTP_IF_MODIFIED_SINCE']);
-    } 
+    }
 
     function testexitIfCached()
     {
@@ -62,8 +62,8 @@ class HTTP_Header_CacheTest extends PHPUnit_Framework_TestCase
         $r->sendRequest();
         $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok');
         unset($r);
-    } 
-    
+    }
+
     function testget()
     {
         require_once 'HTTP/Request.php';
@@ -115,10 +115,4 @@ class HTTP_Header_CacheTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(HTTP::Date(), $r->getResponseHeader('last-modified'), 'POST time() == Last-Modified');
         unset($r);
     }
-} 
-
-$suite  = &new PHPUnit_TestSuite('HTTP_Header_CacheTest');
-$result = &PHPUnit::run($suite);
-echo $result->toString();
-
-?>
+}
