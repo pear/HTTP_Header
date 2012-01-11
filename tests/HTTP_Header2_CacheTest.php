@@ -7,6 +7,7 @@
 
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'HTTP/Header2/Cache.php';
+require_once 'HTTP/Request2.php';
 
 class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 {
@@ -52,67 +53,63 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 
     function testexitIfCached()
     {
-        require_once 'HTTP/Request.php';
-        $r = new HTTP_Request($this->testScript);
-        $r->setMethod(HTTP_REQUEST_METHOD_GET);
-        $r->addHeader('If-Modified-Since', HTTP::Date());
-        $r->sendRequest();
-        $this->assertEquals(304, $r->getResponseCode(), 'HTTP 304 Not Modified');
-        $r->addHeader('If-Modified-Since', HTTP::Date(strtotime('yesterday')));
-        $r->sendRequest();
-        $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok');
+        $r = new HTTP_Request2($this->testScript);
+        $r->setMethod(HTTP_Request2::METHOD_GET);
+        $r->setHeader('If-Modified-Since', HTTP::Date());
+        $response = $r->send();
+        $this->assertEquals(304, $response->getStatus(), 'HTTP 304 Not Modified');
+        $r->setHeader('If-Modified-Since', HTTP::Date(strtotime('yesterday')));
+        $r->send();
+        $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok');
         unset($r);
     }
 
     function testget()
     {
-        require_once 'HTTP/Request.php';
-        $r = new HTTP_Request($this->testScript);
-        $r->setMethod(HTTP_REQUEST_METHOD_GET);
-        $r->sendRequest();
-        $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok (simple plain GET)');
-        $r->addHeader('If-Modified-Since', $r->getResponseHeader('last-modified'));
+        $r = new HTTP_Request2($this->testScript);
+        $r->setMethod(HTTP_Request2::METHOD_GET);
+        $response = $r->send();
+        $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (simple plain GET)');
+        $r->setHeader('If-Modified-Since', $response->getHeader('last-modified'));
         sleep(3);
-        $r->sendRequest();
-        $this->assertEquals(304, $r->getResponseCode(), 'HTTP 304 Not Modified (GET with If-Modified-Since set to Last-Modified of prior request');
+        $response = $r->send();
+        $this->assertEquals(304, $response->getStatus(), 'HTTP 304 Not Modified (GET with If-Modified-Since set to Last-Modified of prior request');
         unset($r);
     }
 
     function testhead()
     {
-        require_once 'HTTP/Request.php';
-        $r = new HTTP_Request($this->testScript);
-        $r->setMethod(HTTP_REQUEST_METHOD_HEAD);
-        $r->sendRequest();
-        $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok (simple plain GET)');
-        $r->addHeader('If-Modified-Since', $r->getResponseHeader('last-modified'));
+        $r = new HTTP_Request2($this->testScript);
+        $r->setMethod(HTTP_Request2::METHOD_HEAD);
+        $response = $r->send();
+        $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (simple plain GET)');
+        $r->setHeader('If-Modified-Since', $response->getHeader('last-modified'));
         sleep(3);
-        $r->sendRequest();
-        $this->assertEquals(304, $r->getResponseCode(), 'HTTP 304 Not Modified (GET with If-Modified-Since set to Last-Modified of prior request');
+        $response = $r->send();
+        $this->assertEquals(304, $response->getStatus(), 'HTTP 304 Not Modified (GET with If-Modified-Since set to Last-Modified of prior request');
         unset($r);
     }
 
     function testpost()
     {
-        require_once 'HTTP/Request.php';
-        $r = new HTTP_Request($this->testScript);
-        $r->setMethod(HTTP_REQUEST_METHOD_GET);
-        $r->sendRequest();
-        $lm = $r->getResponseHeader('last-modified');
-        $r->setMethod(HTTP_REQUEST_METHOD_POST);
-        $r->sendRequest();
-        $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok (POST without If-Modified-Since)');
-        $r->addHeader('If-Modified-Since', HTTP::Date(strtotime('yesterday')));
-        $r->sendRequest();
-        $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok (POST with If-Modified-Since == yesterday)');
-        $r->addHeader('If-Modified-Since', HTTP::Date(time() - 3));
-        $r->sendRequest();
-        $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok (POST with If-Modified-Since == now)');
-        $r->addHeader('If-Modified-Since', HTTP::Date($lm));
+        $r = new HTTP_Request2($this->testScript);
+        $r->setMethod(HTTP_Request2::METHOD_GET);
+        $response = $r->send();
+        $lm = $response->getHeader('last-modified');
+        $r->setMethod(HTTP_Request2::METHOD_POST);
+        $response = $r->send();
+        $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (POST without If-Modified-Since)');
+        $r->setHeader('If-Modified-Since', HTTP::Date(strtotime('yesterday')));
+        $response = $r->send();
+        $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (POST with If-Modified-Since == yesterday)');
+        $r->setHeader('If-Modified-Since', HTTP::Date(time() - 3));
+        $response = $r->send();
+        $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (POST with If-Modified-Since == now)');
+        $r->setHeader('If-Modified-Since', HTTP::Date($lm));
         sleep(3);
-        $r->sendRequest();
-        $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok (POST with If-Modified-Since == Last-Modified)');
-        $this->assertEquals(HTTP::Date(), $r->getResponseHeader('last-modified'), 'POST time() == Last-Modified');
+        $response = $r->send();
+        $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (POST with If-Modified-Since == Last-Modified)');
+        $this->assertEquals(HTTP::Date(), $response->getHeader('last-modified'), 'POST time() == Last-Modified');
         unset($r);
     }
 }
