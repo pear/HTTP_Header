@@ -22,7 +22,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 
     function testgetCacheStart()
     {
-        $c = &new HTTP_Header2_Cache;
+        $c = new HTTP_Header2_Cache;
         $this->assertEquals(time(), $c->getCacheStart());
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(strtotime('yesterday'));
         $this->assertEquals($_SERVER['HTTP_IF_MODIFIED_SINCE'], HTTP::Date($c->getCacheStart()));
@@ -31,7 +31,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 
     function testisOlderThan()
     {
-        $c = &new HTTP_Header2_Cache;
+        $c = new HTTP_Header2_Cache;
         $this->assertTrue($c->isOlderThan(1, 'second'));
         $this->assertTrue($c->isOlderThan(1, 'hour'));
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(time() - 3);
@@ -41,7 +41,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 
     function testisCached()
     {
-        $c = &new HTTP_Header2_Cache;
+        $c = new HTTP_Header2_Cache;
         $this->assertFalse($c->isCached(), 'no last modified');
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(strtotime('yesterday'));
         $this->assertTrue($c->isCached(), 'last modified header');
@@ -53,7 +53,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     function testexitIfCached()
     {
         require_once 'HTTP/Request.php';
-        $r = &new HTTP_Request($this->testScript);
+        $r = new HTTP_Request($this->testScript);
         $r->setMethod(HTTP_REQUEST_METHOD_GET);
         $r->addHeader('If-Modified-Since', HTTP::Date());
         $r->sendRequest();
@@ -67,7 +67,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     function testget()
     {
         require_once 'HTTP/Request.php';
-        $r = &new HTTP_Request($this->testScript);
+        $r = new HTTP_Request($this->testScript);
         $r->setMethod(HTTP_REQUEST_METHOD_GET);
         $r->sendRequest();
         $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok (simple plain GET)');
@@ -81,7 +81,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     function testhead()
     {
         require_once 'HTTP/Request.php';
-        $r = &new HTTP_Request($this->testScript);
+        $r = new HTTP_Request($this->testScript);
         $r->setMethod(HTTP_REQUEST_METHOD_HEAD);
         $r->sendRequest();
         $this->assertEquals(200, $r->getResponseCode(), 'HTTP 200 Ok (simple plain GET)');
@@ -95,7 +95,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     function testpost()
     {
         require_once 'HTTP/Request.php';
-        $r = &new HTTP_Request($this->testScript);
+        $r = new HTTP_Request($this->testScript);
         $r->setMethod(HTTP_REQUEST_METHOD_GET);
         $r->sendRequest();
         $lm = $r->getResponseHeader('last-modified');

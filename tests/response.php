@@ -1,7 +1,7 @@
 <?php
 require_once 'HTTP/Header2.php';
 
-$h = &new HTTP_Header2;
+$h = new HTTP_Header2;
 $s = 200;
 
 foreach ($_GET as $header => $value) {
