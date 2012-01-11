@@ -6,7 +6,7 @@
  */
 
 require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'HTTP/Header.php';
+require_once 'HTTP/Header2.php';
 
 class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 {

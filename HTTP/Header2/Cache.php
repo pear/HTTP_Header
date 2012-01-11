@@ -19,7 +19,7 @@
 /**
  * Requires HTTP_Header2
  */
-require_once 'HTTP/Header.php';
+require_once 'HTTP/Header2.php';
 
 /**
  * HTTP_Header2_Cache

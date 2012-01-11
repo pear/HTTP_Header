@@ -1,5 +1,5 @@
 <?php
-require_once 'HTTP/Header.php';
+require_once 'HTTP/Header2.php';
 
 $h = &new HTTP_Header2;
 $s = 200;

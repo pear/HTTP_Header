@@ -4,7 +4,7 @@
 /**
  * HTTP::Header
  *
- * PHP versions 4 and 5
+ * PHP versions 5
  *
  * @category    HTTP
  * @package     HTTP_Header2
