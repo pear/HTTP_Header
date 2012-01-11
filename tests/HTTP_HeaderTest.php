@@ -1,31 +1,31 @@
 <?php
 /**
- * TestCase for HTTP_Header
- * 
+ * TestCase for HTTP_Header2
+ *
  * $Id$
  */
 
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'HTTP/Header.php';
 
-class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
+class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 {
     function setUp()
     {
-        $this->testScript = 'http://local/www/mike/pear/HTTP_Header/tests/response.php';
-    } 
+        $this->testScript = 'http://local/www/mike/pear/HTTP_Header2/tests/response.php';
+    }
 
-    function testHTTP_Header()
+    function testHTTP_Header2()
     {
-        $h = &new HTTP_Header;
-        $this->assertTrue(is_a($h, 'HTTP_Header'));
+        $h = &new HTTP_Header2;
+        $this->assertTrue(is_a($h, 'HTTP_Header2'));
         $this->assertTrue($h->_httpVersion == 1.1 || $h->_httpVersion == 1.0);
         unset($h);
-    } 
+    }
 
     function testsetHttpVersion()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertFalse($h->setHttpVersion('foo'));
         $this->assertTrue($h->setHttpVersion(1.0));
         $this->assertTrue($h->setHttpVersion(1.1));
@@ -36,11 +36,11 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($h->setHttpVersion('1.0000000000000'));
         $this->assertFalse($h->setHttpVersion(2));
         unset($h);
-    } 
+    }
 
     function testgetHttpVersion()
     {
-        $h = new HTTP_Header;
+        $h = new HTTP_Header2;
         $this->assertTrue($h->getHttpVersion() == 1.0 || $h->getHttpVersion() == 1.1, ' http version is 1.0 or 1.1');
         $h->setHttpVersion(1);
         $this->assertEquals(1, $h->getHttpVersion());
@@ -49,11 +49,11 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $h->setHttpVersion(2);
         $this->assertEquals(1.1, $h->getHttpVersion());
         unset($h);
-    } 
+    }
 
     function testsetHeader()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertFalse($h->setHeader(null), 'set null');
         $this->assertFalse($h->setHeader(''), ' set empty string');
         $this->assertFalse($h->setHeader(0), 'set 0');
@@ -61,11 +61,11 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($h->setHeader('X-Array', array('foo')), 'set array');
         $this->assertFalse($h->setHeader('X-Object', new StdClass), 'set object');
         unset($h);
-    } 
+    }
 
     function testgetHeader()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertEquals('no-cache', $h->getHeader('Pragma'));
         $this->assertEquals('no-cache', $h->getHeader('pRaGmA'));
         $h->setHeader('X-Foo', 'foo');
@@ -74,7 +74,7 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($h->getHeader()), 'test for array');
         $this->assertFalse($h->getHeader('Non-Existant'), 'test unset header');
         unset($h);
-    } 
+    }
 
     function testsendHeaders()
     {
@@ -85,7 +85,7 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $r->sendRequest();
         $this->assertEquals('blablubb', $r->getResponseHeader('x-foo'));
         unset($h, $r);
-    } 
+    }
 
     function testsendStatusCode()
     {
@@ -98,14 +98,14 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $r->sendRequest();
         $this->assertEquals(500, $r->getResponseCode(), 'test for response code 500');
         unset($h, $r);
-    } 
+    }
 
     function testdateToTimestamp()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertEquals(strtotime($d = HTTP::Date()), $h->dateToTimestamp($d));
         unset($h);
-    } 
+    }
 
     function testredirect()
     {
@@ -117,11 +117,11 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(302, $r->getResponseCode(), 'test for response code 302');
         $this->assertTrue(strstr($r->getResponseHeader('location'), 'response.php'));
         unset($h, $r);
-    } 
+    }
 
     function testgetStatusType()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertEquals(HTTP_HEADER_STATUS_INFORMATIONAL, $h->getStatusType(101));
         $this->assertEquals(HTTP_HEADER_STATUS_SUCCESSFUL, $h->getStatusType(206));
         $this->assertEquals(HTTP_HEADER_STATUS_REDIRECT, $h->getStatusType(301));
@@ -129,11 +129,11 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(HTTP_HEADER_STATUS_SERVER_ERROR, $h->getStatusType(500));
         $this->assertFalse($h->getStatusType(8));
         unset($h);
-    } 
+    }
 
     function testgetStatusText()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertEquals(HTTP_HEADER_STATUS_100, '100 '. $h->getStatusText(100));
         $this->assertEquals(HTTP_HEADER_STATUS_200, '200 '. $h->getStatusText(200));
         $this->assertEquals(HTTP_HEADER_STATUS_300, '300 '. $h->getStatusText(300));
@@ -146,61 +146,61 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($h->getStatusText(0));
         $this->assertFalse($h->getStatusText(800));
         unset($h);
-    } 
+    }
 
     function testisInformational()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertTrue($h->isInformational(100));
         $this->assertTrue($h->isInformational(101));
         $this->assertTrue($h->isInformational(102));
         $this->assertFalse($h->isInformational(404));
         unset($h);
-    } 
+    }
 
     function testisSuccessful()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertTrue($h->isSuccessful(200));
         $this->assertTrue($h->isSuccessful(201));
         $this->assertTrue($h->isSuccessful(202));
         $this->assertFalse($h->isSuccessful(404));
         unset($h);
-    } 
+    }
 
     function testisRedirect()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertTrue($h->isRedirect(300));
         $this->assertTrue($h->isRedirect(301));
         $this->assertTrue($h->isRedirect(302));
         $this->assertFalse($h->isRedirect(404));
         unset($h);
-    } 
+    }
 
     function testisClientError()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertTrue($h->isClientError(400));
         $this->assertTrue($h->isClientError(401));
         $this->assertTrue($h->isClientError(404));
         $this->assertFalse($h->isClientError(500));
         unset($h);
-    } 
+    }
 
     function testisServerError()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertTrue($h->isServerError(500));
         $this->assertTrue($h->isServerError(501));
         $this->assertTrue($h->isServerError(502));
         $this->assertFalse($h->isServerError(404));
         unset($h);
-    } 
+    }
 
     function testisError()
     {
-        $h = &new HTTP_Header;
+        $h = &new HTTP_Header2;
         $this->assertTrue($h->isError(500));
         $this->assertTrue($h->isError(501));
         $this->assertTrue($h->isError(502));
@@ -210,6 +210,6 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($h->isError(404));
         $this->assertFalse($h->isError(100));
         unset($h);
-    } 
-} 
+    }
+}
 
