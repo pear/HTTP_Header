@@ -213,8 +213,3 @@ class HTTP_HeaderTest extends PHPUnit_Framework_TestCase
     } 
 } 
 
-$suite  = &new PHPUnit_TestSuite('HTTP_HeaderTest');
-$result = &PHPUnit::run($suite);
-echo $result->toString();
-
-?>
