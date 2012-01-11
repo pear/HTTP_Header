@@ -133,7 +133,6 @@ class HTTP_Header2 extends HTTP
 
     /**
      * @var     bool
-     * @access  public
      */
     var $prettify = false;
 
@@ -142,10 +141,9 @@ class HTTP_Header2 extends HTTP
      *
      * Sets HTTP version.
      *
-     * @access  public
      * @return  object  HTTP_Header2
      */
-    function HTTP_Header2()
+    public function __construct()
     {
         if (isset($_SERVER['SERVER_PROTOCOL'])) {
             $this->setHttpVersion(substr($_SERVER['SERVER_PROTOCOL'], -3));
@@ -155,12 +153,11 @@ class HTTP_Header2 extends HTTP
     /**
      * Set HTTP version
      *
-     * @access  public
      * @return  bool    Returns true on success or false if version doesn't
      *                  match 1.0 or 1.1 (note: 1 will result in 1.0)
      * @param   mixed   $version HTTP version, either 1.0 or 1.1
      */
-    function setHttpVersion($version)
+    public function setHttpVersion($version)
     {
         $version = round((float) $version, 1);
         if ($version < 1.0 || $version > 1.1) {
@@ -173,10 +170,9 @@ class HTTP_Header2 extends HTTP
     /**
      * Get HTTP version
      *
-     * @access  public
      * @return  string
      */
-    function getHttpVersion()
+    public function getHttpVersion()
     {
         return $this->_httpVersion;
     }
@@ -187,13 +183,12 @@ class HTTP_Header2 extends HTTP
      * The default value for the Last-Modified header will be current
      * date and atime if $value is omitted.
      *
-     * @access  public
      * @return  bool    Returns true on success or false if $key was empty or
      *                  $value was not of an scalar type.
      * @param   string  $key The name of the header.
      * @param   string  $value The value of the header. (NULL to unset header)
      */
-    function setHeader($key, $value = null)
+    public function setHeader($key, $value = null)
     {
         if (empty($key) || (isset($value) && !is_scalar($value))) {
             return false;
@@ -222,13 +217,12 @@ class HTTP_Header2 extends HTTP
      *
      * If $key is omitted, all stored headers will be returned.
      *
-     * @access  public
      * @return  mixed   Returns string value of the requested header,
      *                  array values of all headers or false if header $key
      *                  is not set.
      * @param   string  $key    The name of the header to fetch.
      */
-    function getHeader($key = null)
+    public function getHeader($key = null)
     {
         if (!isset($key)) {
             return $this->_headers;
@@ -248,7 +242,6 @@ class HTTP_Header2 extends HTTP
      *
      * Send out the header that you set via setHeader().
      *
-     * @access  public
      * @return  bool    Returns true on success or false if headers are already
      *                  sent.
      * @param   array   $keys Headers to (not) send, see $include.
@@ -256,7 +249,7 @@ class HTTP_Header2 extends HTTP
      *                  sent, if false only header not matching $keys will be
      *                  sent.
      */
-    function sendHeaders($keys = array(), $include = true)
+    public function sendHeaders($keys = array(), $include = true)
     {
         if (headers_sent()) {
             return false;
@@ -286,12 +279,11 @@ class HTTP_Header2 extends HTTP
      *
      * @see HTTP_Header2_Cache::exitIfCached()
      *
-     * @access  public
      * @return  bool    Returns true on success or false if headers are already
      *                  sent.
      * @param   int     $code The status code to send, i.e. 404, 304, 200, etc.
      */
-    function sendStatusCode($code)
+    public function sendStatusCode($code)
     {
         if (headers_sent()) {
             return false;
@@ -318,12 +310,11 @@ class HTTP_Header2 extends HTTP
      * into a timestamp, strtotime() didn't do it in older versions.
      *
      * @deprecated      Use PHPs strtotime() instead.
-     * @access  public
      * @return  mixed   Returns int unix timestamp or false if the date doesn't
      *                  seem to be a valid GMT date.
      * @param   string  $date The GMT date.
      */
-    function dateToTimestamp($date)
+    public function dateToTimestamp($date)
     {
         static $months = array(
             null => 0, 'Jan' => 1, 'Feb' => 2, 'Mar' => 3, 'Apr' => 4,
@@ -357,7 +348,6 @@ class HTTP_Header2 extends HTTP
      *
      * @see     HTTP::redirect()
      * @author  Wolfram Kriesing <wk@visionp.de>
-     * @access  public
      * @return  void
      * @param   string  $url The URL to redirect to, if none is given it
      *                  redirects to the current page.
@@ -367,7 +357,7 @@ class HTTP_Header2 extends HTTP
      *                  value is fetched from $GLOBALS[$value]
      * @param   bool    $session Whether the session name/id should be added
      */
-    function redirect($url = null, $param = array(), $session = false)
+    public function redirect($url = null, $param = array(), $session = false)
     {
         if (!isset($url)) {
             $url = $_SERVER['PHP_SELF'];
@@ -402,7 +392,6 @@ class HTTP_Header2 extends HTTP
     /**#@+
      * @author  Davey Shafik <davey@php.net>
      * @param   int $http_code HTTP Code to check
-     * @access  public
      */
 
     /**
@@ -410,7 +399,7 @@ class HTTP_Header2 extends HTTP
      *
      * @return int|false
      */
-    function getStatusType($http_code)
+    public function getStatusType($http_code)
     {
         if(is_int($http_code) && defined('HTTP_HEADER2_STATUS_' .$http_code) || defined($http_code)) {
             $type = substr($http_code,0,1);
@@ -436,7 +425,7 @@ class HTTP_Header2 extends HTTP
      *
      * @return string|false
      */
-    function getStatusText($http_code)
+    public function getStatusText($http_code)
     {
         if ($this->getStatusType($http_code)) {
             if (is_int($http_code) && defined('HTTP_HEADER2_STATUS_' .$http_code)) {
@@ -454,7 +443,7 @@ class HTTP_Header2 extends HTTP
      *
      * @return boolean
      */
-    function isInformational($http_code)
+    public function isInformational($http_code)
     {
         if ($status_type = $this->getStatusType($http_code)) {
             return $status_type{0} == HTTP_HEADER2_STATUS_INFORMATIONAL;
@@ -468,7 +457,7 @@ class HTTP_Header2 extends HTTP
      *
      * @return boolean
      */
-    function isSuccessful($http_code)
+    public function isSuccessful($http_code)
     {
         if ($status_type = $this->getStatusType($http_code)) {
             return $status_type{0} == HTTP_HEADER2_STATUS_SUCCESSFUL;
@@ -482,7 +471,7 @@ class HTTP_Header2 extends HTTP
      *
      * @return boolean
      */
-    function isRedirect($http_code)
+    public function isRedirect($http_code)
     {
         if ($status_type = $this->getStatusType($http_code)) {
             return $status_type{0} == HTTP_HEADER2_STATUS_REDIRECT;
@@ -496,7 +485,7 @@ class HTTP_Header2 extends HTTP
      *
      * @return boolean
      */
-    function isClientError($http_code)
+    public function isClientError($http_code)
     {
         if ($status_type = $this->getStatusType($http_code)) {
             return $status_type{0} == HTTP_HEADER2_STATUS_CLIENT_ERROR;
@@ -510,7 +499,7 @@ class HTTP_Header2 extends HTTP
      *
      * @return boolean
      */
-    function isServerError($http_code)
+    public function isServerError($http_code)
     {
         if ($status_type = $this->getStatusType($http_code)) {
             return $status_type{0} == HTTP_HEADER2_STATUS_SERVER_ERROR;
@@ -524,7 +513,7 @@ class HTTP_Header2 extends HTTP
      *
      * @return boolean
      */
-    function isError($http_code)
+    public function isError($http_code)
     {
         if ($status_type = $this->getStatusType($http_code)) {
             return (($status_type == HTTP_HEADER2_STATUS_CLIENT_ERROR) || ($status_type == HTTP_HEADER2_STATUS_SERVER_ERROR)) ? true : false;
@@ -534,4 +523,3 @@ class HTTP_Header2 extends HTTP
     }
     /**#@-*/
 }
-?>

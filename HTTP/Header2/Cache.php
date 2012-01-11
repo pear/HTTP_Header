@@ -4,7 +4,7 @@
 /**
  * HTTP::Header::Cache
  *
- * PHP versions 4 and 5
+ * PHP versions 5
  *
  * @category    HTTP
  * @package     HTTP_Header2
@@ -53,14 +53,13 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Set the amount of time to cache.
      *
-     * @access  public
      * @return  object  HTTP_Header2_Cache
      * @param   int     $expires
      * @param   string  $unit
      */
-    function HTTP_Header2_Cache($expires = 0, $unit = 'seconds')
+    public function __construct($expires = 0, $unit = 'seconds')
     {
-        parent::HTTP_Header2();
+        parent::__construct();
         $this->setHeader('Pragma', 'cache');
         $this->setHeader('Last-Modified', $this->getCacheStart());
         $this->setHeader('Cache-Control', 'private, must-revalidate, max-age=0');
@@ -79,10 +78,9 @@ class HTTP_Header2_Cache extends HTTP_Header2
      * Returns the unix timestamp of the If-Modified-Since HTTP header or the
      * current time if the header was not sent by the client.
      *
-     * @access  public
      * @return  int     unix timestamp
      */
-    function getCacheStart()
+    public function getCacheStart()
     {
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && !$this->isPost()) {
             return strtotime(current($array = explode(';',
@@ -115,13 +113,12 @@ class HTTP_Header2_Cache extends HTTP_Header2
      * If you specify something greater than "weeks" as time untit, it just
      * works approximatly, because a month is taken to consist of 4.3 weeks.
      *
-     * @access  public
      * @return  bool    Returns true if requested page is older than specified.
      * @param   int     $time The amount of time.
      * @param   string  $unit The unit of the time amount - (year[s], month[s],
      *                  week[s], day[s], hour[s], minute[s], second[s]).
      */
-    function isOlderThan($time = 0, $unit = 'seconds')
+    public function isOlderThan($time = 0, $unit = 'seconds')
     {
         if (!isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) || $this->isPost()) {
             return true;
@@ -160,11 +157,10 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Check whether we can consider to be cached on the client side.
      *
-     * @access  public
      * @return  bool    Whether the page/resource is considered to be cached.
      * @param   int     $lastModified Unix timestamp of last modification.
      */
-    function isCached($lastModified = 0)
+    public function isCached($lastModified = 0)
     {
         if ($this->isPost()) {
             return false;
@@ -183,10 +179,9 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Check if request method is "POST".
      *
-     * @access  public
      * @return  bool
      */
-    function isPost()
+    public function isPost()
     {
         return  isset($_SERVER['REQUEST_METHOD']) and
             'POST' == $_SERVER['REQUEST_METHOD'];
@@ -197,11 +192,10 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Exit with "HTTP 304 Not Modified" if we consider to be cached.
      *
-     * @access  public
      * @return  void
      * @param   int     $lastModified Unix timestamp of last modification.
      */
-    function exitIfCached($lastModified = 0)
+    public function exitIfCached($lastModified = 0)
     {
         if ($this->isCached($lastModified)) {
             $this->exitCached();
@@ -213,10 +207,9 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Exit with "HTTP 304 Not Modified".
      *
-     * @access  public
      * @return  void
      */
-    function exitCached()
+    public function exitCached()
     {
         $this->sendHeaders();
         $this->sendStatusCode(304);
@@ -226,13 +219,11 @@ class HTTP_Header2_Cache extends HTTP_Header2
     /**
      * Set Last Modified
      *
-     * @access  public
      * @return  void
      * @param   int     $lastModified The unix timestamp of last modification.
      */
-    function setLastModified($lastModified = null)
+    public function setLastModified($lastModified = null)
     {
         $this->setHeader('Last-Modified', $lastModified);
     }
 }
-?>
