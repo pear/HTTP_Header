@@ -7,6 +7,7 @@
 
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'HTTP/Header2.php';
+require_once 'HTTP/Request2.php';
 
 class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 {
@@ -78,25 +79,23 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testsendHeaders()
     {
-        require_once 'HTTP/Request.php';
-        $r = new HTTP_Request($this->testScript);
-        $r->setMethod(HTTP_REQUEST_METHOD_GET);
+        $r = new HTTP_Request2($this->testScript);
+        $r->setMethod(HTTP_Request2::METHOD_GET);
         $r->addQueryString('X-Foo', 'blablubb');
-        $r->sendRequest();
-        $this->assertEquals('blablubb', $r->getResponseHeader('x-foo'));
+        $response = $r->send();
+        $this->assertEquals('blablubb', $response->getHeader('x-foo'));
         unset($h, $r);
     }
 
     function testsendStatusCode()
     {
-        require_once 'HTTP/Request.php';
-        $r = new HTTP_Request($this->testScript);
-        $r->setMethod(HTTP_REQUEST_METHOD_GET);
-        $r->sendRequest();
-        $this->assertEquals(200, $r->getResponseCode(), 'test for response code 200');
+        $r = new HTTP_Request2($this->testScript);
+        $r->setMethod(HTTP_Request2::METHOD_GET);
+        $response = $r->send();
+        $this->assertEquals(200, $response->getStatus(), 'test for response code 200');
         $r->addQueryString('status', 500);
-        $r->sendRequest();
-        $this->assertEquals(500, $r->getResponseCode(), 'test for response code 500');
+        $response = $r->send();
+        $this->assertEquals(500, $response->getStatus(), 'test for response code 500');
         unset($h, $r);
     }
 
@@ -109,13 +108,12 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testredirect()
     {
-        require_once 'HTTP/Request.php';
-        $r = new HTTP_Request($this->testScript, array('allowRedirects' => false));
-        $r->setMethod(HTTP_REQUEST_METHOD_GET);
+        $r = new HTTP_Request2($this->testScript, array('allowRedirects' => false));
+        $r->setMethod(HTTP_Request2::METHOD_GET);
         $r->addQueryString('redirect', 'response.php?abc=123');
-        $r->sendRequest();
-        $this->assertEquals(302, $r->getResponseCode(), 'test for response code 302');
-        $this->assertTrue(strstr($r->getResponseHeader('location'), 'response.php'));
+        $response = $r->send();
+        $this->assertEquals(302, $response->getStatus(), 'test for response code 302');
+        $this->assertTrue(strstr($response->getHeader('location'), 'response.php'));
         unset($h, $r);
     }
 
