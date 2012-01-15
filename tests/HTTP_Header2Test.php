@@ -19,7 +19,6 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
     function testHTTP_Header2()
     {
         $h = new HTTP_Header2;
-        $this->assertTrue(is_a($h, 'HTTP_Header2'));
         $this->assertTrue($h->_httpVersion == 1.1 || $h->_httpVersion == 1.0);
         unset($h);
     }
@@ -116,7 +115,9 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
     {
         $url = new Net_URL2($this->testScript);
         $url->setQueryVariable('redirect', 'response.php?abc=123');
-        $r = new HTTP_Request2($url, array('allowRedirects' => false));
+
+        $r = new HTTP_Request2($url);
+        $r->setConfig('allowRedirects', false));
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $response = $r->send();
         $this->assertEquals(302, $response->getStatus(), 'test for response code 302');
