@@ -20,8 +20,8 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     {
         $c = new HTTP_Header2_Cache;
         $this->assertEquals(time(), $c->getCacheStart());
-        $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(strtotime('yesterday'));
-        $this->assertEquals($_SERVER['HTTP_IF_MODIFIED_SINCE'], HTTP::Date($c->getCacheStart()));
+        $_SERVER['HTTP_IF_MODIFIED_SINCE'] = $c->date(strtotime('yesterday'));
+        $this->assertEquals($_SERVER['HTTP_IF_MODIFIED_SINCE'], $c->date($c->getCacheStart()));
         unset($c, $_SERVER['HTTP_IF_MODIFIED_SINCE']);
     }
 
@@ -30,7 +30,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
         $c = new HTTP_Header2_Cache;
         $this->assertTrue($c->isOlderThan(1, 'second'));
         $this->assertTrue($c->isOlderThan(1, 'hour'));
-        $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(time() - 3);
+        $_SERVER['HTTP_IF_MODIFIED_SINCE'] = $c->date(time() - 3);
         $this->assertTrue($c->isOlderThan(1, 'second'));
         unset($c, $_SERVER['HTTP_IF_MODIFIED_SINCE']);
     }
@@ -39,7 +39,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     {
         $c = new HTTP_Header2_Cache;
         $this->assertFalse($c->isCached(), 'no last modified');
-        $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(strtotime('yesterday'));
+        $_SERVER['HTTP_IF_MODIFIED_SINCE'] = $c->date(strtotime('yesterday'));
         $this->assertTrue($c->isCached(), 'last modified header');
         $this->assertFalse($c->isCached(time()), 'last modified header (yesterday) and param (now)');
         $this->assertTrue($c->isCached(strtotime('last year')), 'last modified header (yesterday) and param (last year)');
@@ -50,10 +50,10 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     {
         $r = new HTTP_Request2($this->testScript);
         $r->setMethod(HTTP_Request2::METHOD_GET);
-        $r->setHeader('If-Modified-Since', HTTP::Date());
+        $r->setHeader('If-Modified-Since', $c->date());
         $response = $r->send();
         $this->assertEquals(304, $response->getStatus(), 'HTTP 304 Not Modified');
-        $r->setHeader('If-Modified-Since', HTTP::Date(strtotime('yesterday')));
+        $r->setHeader('If-Modified-Since', $c->date(strtotime('yesterday')));
         $r->send();
         $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok');
         unset($r);
