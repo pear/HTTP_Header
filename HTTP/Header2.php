@@ -318,18 +318,21 @@ class HTTP_Header2 extends HTTP2
      */
     public function dateToTimestamp($date)
     {
-        static $months = array(
+        if (!is_string($date)) {
+            throw new InvalidArgumentException("Date must be a string, not " . gettype($date));
+        }
+
+        $months = array(
             null => 0, 'Jan' => 1, 'Feb' => 2, 'Mar' => 3, 'Apr' => 4,
             'May' => 5, 'Jun' => 6, 'Jul' => 7, 'Aug' => 8, 'Sep' => 9,
             'Oct' => 10, 'Nov' => 11, 'Dec' => 12
         );
 
-        if (-1 < $timestamp = strToTime($date)) {
+        if (-1 < $timestamp = strtotime($date)) {
             return $timestamp;
         }
 
-        if (!preg_match('~[^,]*,\s(\d+)\s(\w+)\s(\d+)\s(\d+):(\d+):(\d+).*~',
-            $date, $m)) {
+        if (!preg_match('~[^,]*,\s(\d+)\s(\w+)\s(\d+)\s(\d+):(\d+):(\d+).*~', $date, $m)) {
             return false;
         }
 
