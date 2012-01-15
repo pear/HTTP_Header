@@ -48,12 +48,14 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 
     function testexitIfCached()
     {
+        $http = new HTTP2();
+
         $r = new HTTP_Request2($this->testScript);
         $r->setMethod(HTTP_Request2::METHOD_GET);
-        $r->setHeader('If-Modified-Since', $c->date());
+        $r->setHeader('If-Modified-Since', $http->date());
         $response = $r->send();
         $this->assertEquals(304, $response->getStatus(), 'HTTP 304 Not Modified');
-        $r->setHeader('If-Modified-Since', $c->date(strtotime('yesterday')));
+        $r->setHeader('If-Modified-Since', $http->date(strtotime('yesterday')));
         $r->send();
         $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok');
         unset($r);
