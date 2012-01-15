@@ -22,7 +22,7 @@
 require_once 'HTTP/Header2.php';
 
 /**
- * HTTP_Header2::Cache
+ * HTTP_Header2_Cache
  *
  * This package provides methods to easier handle caching of HTTP pages.  That
  * means that the pages can be cached at the client (user agent or browser) and
@@ -36,7 +36,7 @@ require_once 'HTTP/Header2.php';
  * Usage:
  * <code>
  *  require_once 'HTTP/Header/Cache.php';
- *  $httpCache = new HTTP_Header2::Cache(4, 'weeks');
+ *  $httpCache = new HTTP_Header2_Cache(4, 'weeks');
  *  $httpCache->sendHeaders();
  *  // your code goes here
  * </code>
@@ -53,7 +53,7 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Set the amount of time to cache.
      *
-     * @return  object  HTTP_Header2::Cache
+     * @return  object  HTTP_Header2_Cache
      * @param   int     $expires
      * @param   string  $unit
      */

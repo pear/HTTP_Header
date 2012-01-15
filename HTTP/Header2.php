@@ -279,7 +279,7 @@ class HTTP_Header2 extends HTTP2
      * want to tell the client this page is cached, then you would call
      * sendStatusCode(304).
      *
-     * @see HTTP_Header2::Cache::exitIfCached()
+     * @see HTTP_Header2_Cache::exitIfCached()
      *
      * @return  bool    Returns true on success or false if headers are already
      *                  sent.

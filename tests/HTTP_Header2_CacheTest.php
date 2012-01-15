@@ -1,6 +1,6 @@
 <?php
 /**
- * Test Case for HTTP_Header2::Cache
+ * Test Case for HTTP_Header2_Cache
  *
  * Id$
  */
@@ -9,21 +9,16 @@ require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'HTTP/Header2/Cache.php';
 require_once 'HTTP/Request2.php';
 
-class HTTP_Header2::CacheTest extends PHPUnit_Framework_TestCase
+class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 {
     function setUp()
     {
         $this->testScript = 'http://local/www/mike/pear/HTTP_Header2/tests/cacheresponse.php';
     }
 
-    function testHTTP_Header2::Cache()
-    {
-        $this->assertTrue(is_a(new HTTP_Header2::Cache, 'HTTP_Header2::Cache'));
-    }
-
     function testgetCacheStart()
     {
-        $c = new HTTP_Header2::Cache;
+        $c = new HTTP_Header2_Cache;
         $this->assertEquals(time(), $c->getCacheStart());
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(strtotime('yesterday'));
         $this->assertEquals($_SERVER['HTTP_IF_MODIFIED_SINCE'], HTTP::Date($c->getCacheStart()));
@@ -32,7 +27,7 @@ class HTTP_Header2::CacheTest extends PHPUnit_Framework_TestCase
 
     function testisOlderThan()
     {
-        $c = new HTTP_Header2::Cache;
+        $c = new HTTP_Header2_Cache;
         $this->assertTrue($c->isOlderThan(1, 'second'));
         $this->assertTrue($c->isOlderThan(1, 'hour'));
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(time() - 3);
@@ -42,7 +37,7 @@ class HTTP_Header2::CacheTest extends PHPUnit_Framework_TestCase
 
     function testisCached()
     {
-        $c = new HTTP_Header2::Cache;
+        $c = new HTTP_Header2_Cache;
         $this->assertFalse($c->isCached(), 'no last modified');
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = HTTP::Date(strtotime('yesterday'));
         $this->assertTrue($c->isCached(), 'last modified header');
