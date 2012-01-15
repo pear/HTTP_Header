@@ -46,7 +46,7 @@ require_once 'HTTP/Header2.php';
  * @access      public
  * @version     $Revision$
  */
-class HTTP_Header2::Cache extends HTTP_Header2
+class HTTP_Header2_Cache extends HTTP_Header2
 {
     /**
      * Constructor

@@ -20,7 +20,7 @@
 /**
  * Requires HTTP
  */
-require_once 'HTTP.php';
+require_once 'HTTP2.php';
 
 /**
  * HTTP_Header2
@@ -30,7 +30,7 @@ require_once 'HTTP.php';
  * @access      public
  * @version     $Revision$
  */
-class HTTP_Header2 extends HTTP
+class HTTP_Header2 extends HTTP2
 {
 
     /**#@+
@@ -199,9 +199,9 @@ class HTTP_Header2 extends HTTP
         $key = strToLower($key);
         if ($key == 'last-modified') {
             if (!isset($value)) {
-                $value = HTTP::Date(time());
+                $value = $this->date(time());
             } elseif (is_numeric($value)) {
-                $value = HTTP::Date($value);
+                $value = $this->date($value);
             }
         }
 
@@ -342,13 +342,13 @@ class HTTP_Header2 extends HTTP
      * Redirect
      *
      * This function redirects the client. This is done by issuing a Location
-     * header and exiting.  Additionally to HTTP::redirect() you can also add
+     * header and exiting.  Additionally to HTTP2::redirect() you can also add
      * parameters to the url.
      *
-     * If you dont need parameters to be added, simply use HTTP::redirect()
+     * If you dont need parameters to be added, simply use HTTP2::redirect()
      * otherwise use HTTP_Header2::redirect().
      *
-     * @see     HTTP::redirect()
+     * @see     HTTP2::redirect()
      * @author  Wolfram Kriesing <wk@visionp.de>
      * @return  void
      * @param   string  $url The URL to redirect to, if none is given it
