@@ -117,7 +117,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
         $url->setQueryVariable('redirect', 'response.php?abc=123');
 
         $r = new HTTP_Request2($url);
-        $r->setConfig('allowRedirects', false);
+        $r->setConfig('follow_redirects', false);
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $response = $r->send();
         $this->assertEquals(302, $response->getStatus(), 'test for response code 302');
