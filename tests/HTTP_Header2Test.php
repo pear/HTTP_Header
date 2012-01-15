@@ -108,7 +108,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
     function testdateToTimestamp()
     {
         $h = new HTTP_Header2;
-        $this->assertEquals(strtotime($d = HTTP::Date()), $h->dateToTimestamp($d));
+        $this->assertEquals(strtotime($d = $h->date()), $h->dateToTimestamp($d));
         unset($h);
     }
 
