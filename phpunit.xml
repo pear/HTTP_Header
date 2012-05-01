@@ -19,5 +19,7 @@
 	</testsuites>
 	<php>
 		<includePath>lib/HTTP2</includePath>
+		<const name="TEST_URL" value="http://local/www/mike/pear/HTTP_Header2/tests/response.php'"/>
+		<const name="CACHE_TEST_URL" value="http://local/www/mike/pear/HTTP_Header2/tests/cacheresponse.php"/>
 	</php>
 </phpunit>

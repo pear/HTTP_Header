@@ -6,7 +6,7 @@ $s = 200;
 
 foreach ($_GET as $header => $value) {
     if (!strcasecmp('redirect', $header)) {
-        HTTP_Header2::redirect($value);
+        $h->redirect($value);
     }
     if (strcasecmp('status', $header)) {
         $h->setHeader($header, $value);

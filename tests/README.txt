@@ -3,8 +3,8 @@ Running the TestSuite
 $Id$
 
 Copy response.php and cacheresponse.php into an
-accessible webfolder and adjust the script locations
-in the setUp() methods of header.php and header_cache.php
+accessible webfolder and TEST_URL and CACHE_TEST URL
+constants in phpunit.xml.
 
 Now run header.php and header_cache.php with PHPUnit
 and HTTP_Request installed.  The caching test will

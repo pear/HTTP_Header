@@ -11,10 +11,6 @@ require_once 'HTTP/Request2.php';
 
 class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 {
-    function setUp()
-    {
-        $this->testScript = 'http://local/www/mike/pear/HTTP_Header2/tests/cacheresponse.php';
-    }
 
     function testgetCacheStart()
     {
@@ -50,20 +46,20 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     {
         $http = new HTTP2();
 
-        $r = new HTTP_Request2($this->testScript);
+        $r = new HTTP_Request2(CACHE_TEST_URL);
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $r->setHeader('If-Modified-Since', $http->date());
         $response = $r->send();
         $this->assertEquals(304, $response->getStatus(), 'HTTP 304 Not Modified');
         $r->setHeader('If-Modified-Since', $http->date(strtotime('yesterday')));
-        $r->send();
+        $response = $r->send();
         $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok');
         unset($r);
     }
 
     function testget()
     {
-        $r = new HTTP_Request2($this->testScript);
+        $r = new HTTP_Request2(CACHE_TEST_URL);
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $response = $r->send();
         $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (simple plain GET)');
@@ -76,7 +72,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 
     function testhead()
     {
-        $r = new HTTP_Request2($this->testScript);
+        $r = new HTTP_Request2(CACHE_TEST_URL);
         $r->setMethod(HTTP_Request2::METHOD_HEAD);
         $response = $r->send();
         $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (simple plain GET)');
@@ -91,7 +87,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     {
         $http = new HTTP2();
 
-        $r = new HTTP_Request2($this->testScript);
+        $r = new HTTP_Request2(CACHE_TEST_URL);
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $response = $r->send();
         $lm = $response->getHeader('last-modified');

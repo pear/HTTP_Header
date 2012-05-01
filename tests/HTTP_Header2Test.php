@@ -4,18 +4,13 @@
  *
  * $Id$
  */
-
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'HTTP/Header2.php';
 require_once 'HTTP/Request2.php';
+require_once 'Net/URL2.php';
 
 class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 {
-    function setUp()
-    {
-        $this->testScript = 'http://local/www/mike/pear/HTTP_Header2/tests/response.php';
-    }
-
     function testHTTP_Header2()
     {
         $h = new HTTP_Header2;
@@ -78,7 +73,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testsendHeaders()
     {
-        $url = new Net_URL2($this->testScript);
+        $url = new Net_URL2(TEST_URL);
         $url->setQueryVariable('X-Foo', 'blablubb');
 
         $r = new HTTP_Request2($url);
@@ -90,7 +85,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testsendStatusCode()
     {
-        $url = new Net_URL2($this->testScript);
+        $url = new Net_URL2(TEST_URL);
         $r = new HTTP_Request2($url);
 
         $r->setMethod(HTTP_Request2::METHOD_GET);
@@ -113,7 +108,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testredirect()
     {
-        $url = new Net_URL2($this->testScript);
+        $url = new Net_URL2(TEST_URL);
         $url->setQueryVariable('redirect', 'response.php?abc=123');
 
         $r = new HTTP_Request2($url);
@@ -121,7 +116,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $response = $r->send();
         $this->assertEquals(302, $response->getStatus(), 'test for response code 302');
-        $this->assertTrue(strstr($response->getHeader('location'), 'response.php'));
+        $this->assertContains('response.php', $response->getHeader('location'));
         unset($h, $r);
     }
 
