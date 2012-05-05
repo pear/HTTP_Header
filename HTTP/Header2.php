@@ -6,15 +6,15 @@
  *
  * PHP versions 5
  *
- * @category    HTTP
- * @package     HTTP_Header2
- * @author      Wolfram Kriesing <wk@visionp.de>
- * @author      Davey Shafik <davey@php.net>
- * @author      Michael Wallner <mike@php.net>
- * @copyright   2003-2005 The Authors
- * @license     BSD, revised
- * @version     CVS: $Id$
- * @link        http://pear.php.net/package/HTTP_Header2
+ * @category  HTTP
+ * @package   HTTP_Header2
+ * @author    Wolfram Kriesing <wk@visionp.de>
+ * @author    Davey Shafik <davey@php.net>
+ * @author    Michael Wallner <mike@php.net>
+ * @copyright 2003-2005 The Authors
+ * @license   BSD, revised
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/HTTP_Header2
  */
 
 /**
@@ -25,10 +25,14 @@ require_once 'HTTP2.php';
 /**
  * HTTP_Header2
  *
- * @package     HTTP_Header2
- * @category    HTTP
- * @access      public
- * @version     $Revision$
+ * @category HTTP
+ * @package  HTTP_Header2
+ * @author   Wolfram Kriesing <wk@visionp.de>
+ * @author   Davey Shafik <davey@php.net>
+ * @author   Michael Wallner <mike@php.net>
+ * @license  BSD, revised
+ * @version  $Revision$
+ * @link     http://pear.php.net/package/HTTP_Header2
  */
 class HTTP_Header2 extends HTTP2
 {
@@ -120,9 +124,9 @@ class HTTP_Header2 extends HTTP2
      * @access  private
      */
     private $_headers = array(
-        'content-type'  =>  'text/html',
-        'pragma'        =>  'no-cache',
-        'cache-control' =>  'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
+        'content-type'  => 'text/html',
+        'pragma'        => 'no-cache',
+        'cache-control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
     );
 
     /**
@@ -155,9 +159,10 @@ class HTTP_Header2 extends HTTP2
     /**
      * Set HTTP version
      *
-     * @return  bool    Returns true on success or false if version doesn't
-     *                  match 1.0 or 1.1 (note: 1 will result in 1.0)
-     * @param   mixed   $version HTTP version, either 1.0 or 1.1
+     * @param mixed $version HTTP version, either 1.0 or 1.1
+     * 
+     * @return bool Returns true on success or false if version doesn't
+     *              match 1.0 or 1.1 (note: 1 will result in 1.0)
      */
     public function setHttpVersion($version)
     {
@@ -183,12 +188,13 @@ class HTTP_Header2 extends HTTP2
      * Set Header
      *
      * The default value for the Last-Modified header will be current
-     * date and atime if $value is omitted.
+     * date and time if $value is omitted.
      *
-     * @return  bool    Returns true on success or false if $key was empty or
-     *                  $value was not of an scalar type.
-     * @param   string  $key The name of the header.
-     * @param   string  $value The value of the header. (NULL to unset header)
+     * @param string $key   The name of the header.
+     * @param string $value The value of the header. (NULL to unset header)
+     * 
+     * @return bool Returns true on success or false if $key was empty or
+     *              $value was not of an scalar type.
      */
     public function setHeader($key, $value = null)
     {
@@ -219,10 +225,10 @@ class HTTP_Header2 extends HTTP2
      *
      * If $key is omitted, all stored headers will be returned.
      *
-     * @return  mixed   Returns string value of the requested header,
-     *                  array values of all headers or false if header $key
-     *                  is not set.
-     * @param   string  $key    The name of the header to fetch.
+     * @param string $key The name of the header to fetch.
+     *
+     * @return mixed Returns string value of the requested header, array values
+     *               of all headers or false if header $key is not set.
      */
     public function getHeader($key = null)
     {
@@ -244,11 +250,12 @@ class HTTP_Header2 extends HTTP2
      *
      * Send out the header that you set via setHeader().
      *
+     * @param array $keys    Headers to (not) send, see $include.
+     * @param array $include If true only $keys matching headers will be sent,
+     *                       if false only header not matching $keys will be
+     *                       sent.
+     *
      * @return  bool    Returns true on success or false if headers are already
-     *                  sent.
-     * @param   array   $keys Headers to (not) send, see $include.
-     * @param   array   $include If true only $keys matching headers will be
-     *                  sent, if false only header not matching $keys will be
      *                  sent.
      */
     public function sendHeaders($keys = array(), $include = true)
@@ -277,13 +284,12 @@ class HTTP_Header2 extends HTTP2
      *
      * Send out the given HTTP-Status code. Use this for example when you
      * want to tell the client this page is cached, then you would call
-     * sendStatusCode(304).
+     * sendStatusCode(304). {@see HTTP_Header2_Cache::exitIfCached()}
      *
-     * @see HTTP_Header2_Cache::exitIfCached()
-     *
-     * @return  bool    Returns true on success or false if headers are already
+     * @param int $code The status code to send, i.e. 404, 304, 200, etc.
+     * 
+     * @return bool Returns true on success or false if headers are already
      *                  sent.
-     * @param   int     $code The status code to send, i.e. 404, 304, 200, etc.
      */
     public function sendStatusCode($code)
     {
@@ -311,15 +317,19 @@ class HTTP_Header2 extends HTTP2
      *      Tue, 15 Nov 1994 12:45:26 GMT
      * into a timestamp, strtotime() didn't do it in older versions.
      *
-     * @deprecated      Use PHPs strtotime() instead.
-     * @return  mixed   Returns int unix timestamp or false if the date doesn't
-     *                  seem to be a valid GMT date.
-     * @param   string  $date The GMT date.
+     * @param string $date The GMT date.
+     *
+     * @deprecated Use PHPs strtotime() instead.
+     *
+     * @return mixed Returns int unix timestamp or false if the date doesn't
+     *               seem to be a valid GMT date.
      */
     public function dateToTimestamp($date)
     {
         if (!is_string($date)) {
-            throw new InvalidArgumentException("Date must be a string, not " . gettype($date));
+            throw new InvalidArgumentException(
+                "Date must be a string, not " . gettype($date)
+            );
         }
 
         $months = array(
@@ -332,7 +342,8 @@ class HTTP_Header2 extends HTTP2
             return $timestamp;
         }
 
-        if (!preg_match('~[^,]*,\s(\d+)\s(\w+)\s(\d+)\s(\d+):(\d+):(\d+).*~', $date, $m)) {
+        $regex = '~[^,]*,\s(\d+)\s(\w+)\s(\d+)\s(\d+):(\d+):(\d+).*~';
+        if (!preg_match($regex, $date, $m)) {
             return false;
         }
 
@@ -350,17 +361,20 @@ class HTTP_Header2 extends HTTP2
      *
      * If you dont need parameters to be added, simply use HTTP2::redirect()
      * otherwise use HTTP_Header2::redirect().
-     *
+     * 
+     * @param string $url     The URL to redirect to, if none is given it
+     *                        redirects to the current page.
+     * @param array  $param   Array of query string parameters to add; usually a
+     *                        set of key => value pairs; if an array entry
+     *                        consists only of an value it is used as key and
+     *                        the respective value is fetched from
+     *                        $GLOBALS[$value]
+     * @param bool   $session Whether the session name/id should be added
+     * 
      * @see     HTTP2::redirect()
      * @author  Wolfram Kriesing <wk@visionp.de>
+     * 
      * @return  void
-     * @param   string  $url The URL to redirect to, if none is given it
-     *                  redirects to the current page.
-     * @param   array   $param Array of query string parameters to add; usually
-     *                  a set of key => value pairs; if an array entry consists
-     *                  only of an value it is used as key and the respective
-     *                  value is fetched from $GLOBALS[$value]
-     * @param   bool    $session Whether the session name/id should be added
      */
     public function redirect($url = null, $param = array(), $session = false)
     {
@@ -402,23 +416,27 @@ class HTTP_Header2 extends HTTP2
     /**
      * Return HTTP Status Code Type
      *
+     * @param string $http_code HTTP status code
+     *
      * @return int|false
      */
     public function getStatusType($http_code)
     {
-        if(is_int($http_code) && defined('HTTP_Header2::STATUS_' .$http_code) || defined($http_code)) {
-            $type = substr($http_code,0,1);
+        if (is_int($http_code) && defined('HTTP_Header2::STATUS_' .$http_code)
+            || defined($http_code)
+        ) {
+            $type = substr($http_code, 0, 1);
             switch ($type) {
-                case HTTP_Header2::STATUS_INFORMATIONAL:
-                case HTTP_Header2::STATUS_SUCCESSFUL:
-                case HTTP_Header2::STATUS_REDIRECT:
-                case HTTP_Header2::STATUS_CLIENT_ERROR:
-                case HTTP_Header2::STATUS_SERVER_ERROR:
-                    return $type;
-                    break;
-                default:
-                    return false;
-                    break;
+            case HTTP_Header2::STATUS_INFORMATIONAL:
+            case HTTP_Header2::STATUS_SUCCESSFUL:
+            case HTTP_Header2::STATUS_REDIRECT:
+            case HTTP_Header2::STATUS_CLIENT_ERROR:
+            case HTTP_Header2::STATUS_SERVER_ERROR:
+                return $type;
+                break;
+            default:
+                return false;
+                break;
             }
         } else {
             return false;
@@ -428,15 +446,17 @@ class HTTP_Header2 extends HTTP2
     /**
      * Return Status Code Message
      *
+     * @param string $http_code HTTP status code
+     *
      * @return string|false
      */
     public function getStatusText($http_code)
     {
         if ($this->getStatusType($http_code)) {
             if (is_int($http_code) && defined('HTTP_Header2::STATUS_' .$http_code)) {
-                return substr(constant('HTTP_Header2::STATUS_' .$http_code),4);
+                return substr(constant('HTTP_Header2::STATUS_' .$http_code), 4);
             } else {
-                return substr($http_code,4);
+                return substr($http_code, 4);
             }
         } else {
             return false;
@@ -445,6 +465,8 @@ class HTTP_Header2 extends HTTP2
 
     /**
      * Checks if HTTP Status code is Information (1xx)
+     * 
+     * @param string $http_code HTTP status code
      *
      * @return boolean
      */
@@ -459,6 +481,8 @@ class HTTP_Header2 extends HTTP2
 
     /**
      * Checks if HTTP Status code is Successful (2xx)
+     * 
+     * @param string $http_code HTTP status code
      *
      * @return boolean
      */
@@ -473,6 +497,8 @@ class HTTP_Header2 extends HTTP2
 
     /**
      * Checks if HTTP Status code is a Redirect (3xx)
+     * 
+     * @param string $http_code HTTP status code
      *
      * @return boolean
      */
@@ -487,6 +513,8 @@ class HTTP_Header2 extends HTTP2
 
     /**
      * Checks if HTTP Status code is a Client Error (4xx)
+     * 
+     * @param string $http_code HTTP status code
      *
      * @return boolean
      */
@@ -501,6 +529,8 @@ class HTTP_Header2 extends HTTP2
 
     /**
      * Checks if HTTP Status code is Server Error (5xx)
+     * 
+     * @param string $http_code HTTP status code
      *
      * @return boolean
      */
@@ -515,13 +545,17 @@ class HTTP_Header2 extends HTTP2
 
     /**
      * Checks if HTTP Status code is Server OR Client Error (4xx or 5xx)
+     * 
+     * @param string $http_code HTTP status code
      *
      * @return boolean
      */
     public function isError($http_code)
     {
         if ($status_type = $this->getStatusType($http_code)) {
-            return (($status_type == HTTP_Header2::STATUS_CLIENT_ERROR) || ($status_type == HTTP_Header2::STATUS_SERVER_ERROR)) ? true : false;
+            return (   ($status_type == HTTP_Header2::STATUS_CLIENT_ERROR)
+                    || ($status_type == HTTP_Header2::STATUS_SERVER_ERROR)
+                   );
         } else {
             return false;
         }

@@ -6,14 +6,14 @@
  *
  * PHP versions 5
  *
- * @category    HTTP
- * @package     HTTP_Header2
- * @author      Wolfram Kriesing <wk@visionp.de>
- * @author      Michael Wallner <mike@php.net>
- * @copyright   2003-2005 The Authors
- * @license     BSD, revised
- * @version     CVS: $Id$
- * @link        http://pear.php.net/package/HTTP_Header2
+ * @category  HTTP
+ * @package   HTTP_Header2
+ * @author    Wolfram Kriesing <wk@visionp.de>
+ * @author    Michael Wallner <mike@php.net>
+ * @copyright 2003-2005 The Authors
+ * @license   BSD, revised
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/HTTP_Header2
  */
 
 /**
@@ -41,10 +41,13 @@ require_once 'HTTP/Header2.php';
  *  // your code goes here
  * </code>
  *
- * @package     HTTP_Header2
- * @category    HTTP
- * @access      public
- * @version     $Revision$
+ * @category HTTP
+ * @package  HTTP_Header2
+ * @author   Wolfram Kriesing <wk@visionp.de>
+ * @author   Michael Wallner <mike@php.net>
+ * @license  BSD, revised
+ * @version  $Revision$
+ * @link     http://pear.php.net/package/HTTP_Header2
  */
 class HTTP_Header2_Cache extends HTTP_Header2
 {
@@ -53,9 +56,8 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Set the amount of time to cache.
      *
-     * @return  object  HTTP_Header2_Cache
-     * @param   int     $expires
-     * @param   string  $unit
+     * @param int    $expires Amount of time for cache to last
+     * @param string $unit    The unit of time to keep cache
      */
     public function __construct($expires = 0, $unit = 'seconds')
     {
@@ -78,13 +80,13 @@ class HTTP_Header2_Cache extends HTTP_Header2
      * Returns the unix timestamp of the If-Modified-Since HTTP header or the
      * current time if the header was not sent by the client.
      *
-     * @return  int     unix timestamp
+     * @return int unix timestamp
      */
     public function getCacheStart()
     {
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && !$this->isPost()) {
-            return strtotime(current($array = explode(';',
-                $_SERVER['HTTP_IF_MODIFIED_SINCE'])));
+            $data = explode(';', $_SERVER['HTTP_IF_MODIFIED_SINCE']);
+            return strtotime(current($data));
         }
         return time();
     }
@@ -113,10 +115,11 @@ class HTTP_Header2_Cache extends HTTP_Header2
      * If you specify something greater than "weeks" as time untit, it just
      * works approximatly, because a month is taken to consist of 4.3 weeks.
      *
+     * @param int    $time The amount of time.
+     * @param string $unit The unit of the time amount - (year[s], month[s],
+     *                     week[s], day[s], hour[s], minute[s], second[s]).
+     *
      * @return  bool    Returns true if requested page is older than specified.
-     * @param   int     $time The amount of time.
-     * @param   string  $unit The unit of the time amount - (year[s], month[s],
-     *                  week[s], day[s], hour[s], minute[s], second[s]).
      */
     public function isOlderThan($time = 0, $unit = 'seconds')
     {
@@ -127,26 +130,25 @@ class HTTP_Header2_Cache extends HTTP_Header2
             return false;
         }
 
-        switch (strtolower($unit))
-        {
-            case 'year':
-            case 'years':
-                $time *= 12;
-            case 'month':
-            case 'months':
-                $time *= 4.3;
-            case 'week':
-            case 'weeks':
-                $time *= 7;
-            case 'day':
-            case 'days':
-                $time *= 24;
-            case 'hour':
-            case 'hours':
-                $time *= 60;
-            case 'minute':
-            case 'minutes':
-                $time *= 60;
+        switch (strtolower($unit)) {
+        case 'year':
+        case 'years':
+            $time *= 12;
+        case 'month':
+        case 'months':
+            $time *= 4.3;
+        case 'week':
+        case 'weeks':
+            $time *= 7;
+        case 'day':
+        case 'days':
+            $time *= 24;
+        case 'hour':
+        case 'hours':
+            $time *= 60;
+        case 'minute':
+        case 'minutes':
+            $time *= 60;
         }
 
         return (time() - $this->getCacheStart()) > $time;
@@ -157,8 +159,9 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Check whether we can consider to be cached on the client side.
      *
-     * @return  bool    Whether the page/resource is considered to be cached.
-     * @param   int     $lastModified Unix timestamp of last modification.
+     * @param int $lastModified Unix timestamp of last modification.
+     * 
+     * @return bool Whether the page/resource is considered to be cached.
      */
     public function isCached($lastModified = 0)
     {
@@ -192,8 +195,9 @@ class HTTP_Header2_Cache extends HTTP_Header2
      *
      * Exit with "HTTP 304 Not Modified" if we consider to be cached.
      *
+     * @param int $lastModified Unix timestamp of last modification.
+     * 
      * @return  void
-     * @param   int     $lastModified Unix timestamp of last modification.
      */
     public function exitIfCached($lastModified = 0)
     {
@@ -219,8 +223,9 @@ class HTTP_Header2_Cache extends HTTP_Header2
     /**
      * Set Last Modified
      *
+     * @param int $lastModified The unix timestamp of last modification.
+     * 
      * @return  void
-     * @param   int     $lastModified The unix timestamp of last modification.
      */
     public function setLastModified($lastModified = null)
     {
