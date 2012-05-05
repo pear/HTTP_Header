@@ -46,7 +46,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     {
         $http = new HTTP2();
 
-        $r = new HTTP_Request2(CACHE_TEST_URL);
+        $r = new HTTP_Request2(HTTP_HEADER2_CACHE_TEST_URL);
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $r->setHeader('If-Modified-Since', $http->date());
         $response = $r->send();
@@ -59,7 +59,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 
     function testget()
     {
-        $r = new HTTP_Request2(CACHE_TEST_URL);
+        $r = new HTTP_Request2(HTTP_HEADER2_CACHE_TEST_URL);
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $response = $r->send();
         $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (simple plain GET)');
@@ -72,7 +72,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
 
     function testhead()
     {
-        $r = new HTTP_Request2(CACHE_TEST_URL);
+        $r = new HTTP_Request2(HTTP_HEADER2_CACHE_TEST_URL);
         $r->setMethod(HTTP_Request2::METHOD_HEAD);
         $response = $r->send();
         $this->assertEquals(200, $response->getStatus(), 'HTTP 200 Ok (simple plain GET)');
@@ -87,7 +87,7 @@ class HTTP_Header2_CacheTest extends PHPUnit_Framework_TestCase
     {
         $http = new HTTP2();
 
-        $r = new HTTP_Request2(CACHE_TEST_URL);
+        $r = new HTTP_Request2(HTTP_HEADER2_CACHE_TEST_URL);
         $r->setMethod(HTTP_Request2::METHOD_GET);
         $response = $r->send();
         $lm = $response->getHeader('last-modified');

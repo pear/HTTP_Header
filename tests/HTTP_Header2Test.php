@@ -73,7 +73,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testsendHeaders()
     {
-        $url = new Net_URL2(TEST_URL);
+        $url = new Net_URL2(HTTP_HEADER2_TEST_URL);
         $url->setQueryVariable('X-Foo', 'blablubb');
 
         $r = new HTTP_Request2($url);
@@ -85,7 +85,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testsendStatusCode()
     {
-        $url = new Net_URL2(TEST_URL);
+        $url = new Net_URL2(HTTP_HEADER2_TEST_URL);
         $r = new HTTP_Request2($url);
 
         $r->setMethod(HTTP_Request2::METHOD_GET);
@@ -108,7 +108,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
 
     function testredirect()
     {
-        $url = new Net_URL2(TEST_URL);
+        $url = new Net_URL2(HTTP_HEADER2_TEST_URL);
         $url->setQueryVariable('redirect', 'response.php?abc=123');
 
         $r = new HTTP_Request2($url);
