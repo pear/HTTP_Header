@@ -14,7 +14,7 @@ class HTTP_Header2Test extends PHPUnit_Framework_TestCase
     function testHTTP_Header2()
     {
         $h = new HTTP_Header2;
-        $this->assertTrue($h->_httpVersion == 1.1 || $h->_httpVersion == 1.0);
+        $this->assertTrue($h->getHttpVersion() == 1.1 || $h->getHttpVersion() == 1.0);
         unset($h);
     }
 

@@ -119,7 +119,7 @@ class HTTP_Header2 extends HTTP2
      * @var     array
      * @access  private
      */
-    var $_headers = array(
+    private $_headers = array(
         'content-type'  =>  'text/html',
         'pragma'        =>  'no-cache',
         'cache-control' =>  'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
@@ -131,12 +131,12 @@ class HTTP_Header2 extends HTTP2
      * @var     string
      * @access  private
      */
-    var $_httpVersion = '1.0';
+    private $_httpVersion = '1.0';
 
     /**
      * @var     bool
      */
-    var $prettify = false;
+    public $prettify = false;
 
     /**
      * Constructor
