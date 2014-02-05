@@ -261,17 +261,23 @@ class HTTP_Header extends HTTP
         if (headers_sent()) {
             return false;
         }
-        
+
         if (count($keys)) {
             array_change_key_case($keys, CASE_LOWER);
             foreach ($this->_headers as $key => $value) {
                 if ($include ? in_array($key, $keys) : !in_array($key, $keys)) {
-                    header(($this->prettify ? uctitle($key) : $key) .': '. $value);
+                    if ($this->prettify) {
+                        $key = implode('-', array_map('ucfirst', explode('-', $key)));
+                    }
+                    header($key . ': '. $value);
                 }
             }
         } else {
             foreach ($this->_headers as $header => $value) {
-                header(($this->prettify ? uctitle($header) : $header) .': '. $value);
+                if ($this->prettify) {
+                    $header = implode('-', array_map('ucfirst', explode('-', $header)));
+                }
+                header($header . ': ' . $value);
             }
         }
         return true;
