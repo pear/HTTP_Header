@@ -1,0 +1,42 @@
+{
+    "authors": [
+        {
+            "email": "wolfram@kriesing.de",
+            "name": "Wolfram Kriesing",
+            "role": "Lead"
+        },
+        {
+            "email": "davey@php.net",
+            "name": "Davey Shafik",
+            "role": "Lead"
+        },
+        {
+            "email": "mike@php.net",
+            "name": "Michael Wallner",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "HTTP": "./"
+        }
+    },
+    "description": "More info available on: http://pear.php.net/package/HTTP_Header",
+    "include-path": [
+        "./"
+    ],
+    "license": "BSD, revised",
+    "name": "pear/http_header",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=HTTP_Header",
+        "source": "https://github.com/pear/HTTP_Header"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*",
+        "pear/http": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
